@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>projectagent</artifactId>
+		<groupId>org.dubenets.projects</groupId>
+		<version>${project.build.version}</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>projectagentDomain</artifactId>
+	<description>Module for application models holding</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSR-303 (Bean Validation) Implementation -->
+		<!-- Provides portable constraints such as @Email -->
+		<!-- Hibernate Validator is shipped in JBoss AS 7 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerArguments>
+						<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

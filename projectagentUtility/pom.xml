@@ -1,0 +1,11 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.dubenets.projects</groupId>
+    <artifactId>projectagent</artifactId>
+    <version>${project.build.version}</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <artifactId>projectagentUtility</artifactId>
+  <description>Module for static utility implementation</description>
+</project>

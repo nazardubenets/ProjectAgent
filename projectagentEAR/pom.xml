@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>projectagent</artifactId>
+		<groupId>org.dubenets.projects</groupId>
+		<version>${project.build.version}</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>projectagentEAR</artifactId>
+	<packaging>ear</packaging>
+	<description>Result EAR includes Web and Service modules</description>
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>projectagentDomain</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>projectagentUtility</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>projectagentDAO</artifactId>
+			<type>ejb</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>projectagentService</artifactId>
+			<type>ejb</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>projectagentWeb</artifactId>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<version>6</version>
+					<generatedDescriptorLocation>${basedir}/src/main/application/META-INF</generatedDescriptorLocation>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<initializeInOrder>true</initializeInOrder>
+					<skinnyWars>true</skinnyWars>
+					<modules>
+						<jarModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>projectagentDomain</artifactId>
+							<bundleFileName>projectagentDomain.jar</bundleFileName>
+						</jarModule>
+						
+						<jarModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>projectagentUtility</artifactId>
+							<bundleFileName>projectagentUtility.jar</bundleFileName>
+						</jarModule>
+						
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>projectagentDAO</artifactId>
+							<bundleFileName>projectagentDAO.jar</bundleFileName>
+						</ejbModule>
+						
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>projectagentService</artifactId>
+							<bundleFileName>projectagentService.jar</bundleFileName>
+						</ejbModule>
+						
+						<webModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>projectagentWeb</artifactId>
+							<bundleFileName>projectagentWeb.war</bundleFileName>
+							<contextRoot>${projectagent.contextRoot}</contextRoot>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<ignoreMissingDeployment>true</ignoreMissingDeployment>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

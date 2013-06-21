@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>projectagent</artifactId>
+		<groupId>org.dubenets.projects</groupId>
+		<version>${project.build.version}</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>projectagentService</artifactId>
+	<description>Module includes services for buisness logic</description>
+	<packaging>ejb</packaging>
+	
+	<properties>
+		<jaxws.wsdlLocation>http://${projectagent.host}:${projectagent.port}/${projectagent.contextRoot}WSDLs/</jaxws.wsdlLocation>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.dubenets.projects</groupId>
+			<artifactId>projectagentDomain</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.dubenets.projects</groupId>
+			<artifactId>projectagentUtility</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.dubenets.projects</groupId>
+			<artifactId>projectagentDAO</artifactId>
+			<type>ejb</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.spec.javax.transaction</groupId>
+			<artifactId>jboss-transaction-api_1.1_spec</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+		<!-- 
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<configuration>
+					<sei>org.dubenets.projects.projectagent.services.Hello</sei>
+					<genWsdl>true</genWsdl>
+					<resourceDestDir>src/main/java/org/dubenets/projects/projectagent/service/jaxws/wsgen/wsdl</resourceDestDir>
+					<sourceDestDir>src/main/java</sourceDestDir>
+					<wsdlDirectory>src/main/java/org/dubenets/projects/projectagent/service/jaxws/wsgen/wsdl</wsdlDirectory>
+					<packageName>org.dubenets.projects.projectagent.service.jaxws.generated</packageName>
+					<wsdlLocation>${jaxws.wsdlLocation}</wsdlLocation>
+				</configuration>
+			</plugin>
+		 -->
+			<plugin>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
