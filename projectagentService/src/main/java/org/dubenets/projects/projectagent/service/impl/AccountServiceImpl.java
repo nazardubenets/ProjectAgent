@@ -15,7 +15,7 @@ import org.dubenets.projects.projectagent.service.remote.AccountServiceRemote;
 /**
  * Session Bean implementation class AccountServiceImpl
  */
-@Stateless(mappedName = "AccountServiceImpl")
+@Stateless
 public class AccountServiceImpl extends GenericServiceImpl<Account> implements AccountServiceRemote, AccountServiceLocal {
 	
     public AccountServiceImpl() {

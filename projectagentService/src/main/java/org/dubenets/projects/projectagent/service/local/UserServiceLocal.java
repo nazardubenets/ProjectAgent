@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import org.dubenets.projects.projectagent.domain.enums.UserRole;
-import org.dubenets.projects.projectagent.domain.models.User;
+import org.dubenets.projects.projectagent.domain.enums.Role;
+import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 import org.dubenets.projects.projectagent.service.generic.GenericService;
 
 @Local
-public interface UserServiceLocal extends GenericService<User> {
+public interface UserServiceLocal extends GenericService<ApplicationUser> {
 
-	public List<User> getUsersWithRoles(UserRole ... userRoles);
+	public List<ApplicationUser> getUsersWithRoles(Role ... userRoles);
 }

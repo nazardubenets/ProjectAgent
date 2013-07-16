@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:security="http://www.springframework.org/security/tags">
+	
+	<f:view>
+		<h:head>
+		</h:head>
+		<h:body>
+			<h:messages />
+			<h:form id="loginForm" prependId="false">
+				<label for="j_username"> <h:outputText
+						value="#{ message.login_userName }" />
+				</label>
+				<br />
+				<h:inputText id="j_username" required="true"/>
+				<br />
+				<br />
+				<label for="j_password"> <h:outputText
+						value="#{ message.login_password }" /><br />
+				</label>
+				<h:inputSecret id="j_password" required="true"/>
+				<br />
+				<br />
+				<h:commandButton type="submit" id="login"
+					action="#{authenticationBean.login}" value="Login" />
+	
+				<security:authorize access="hasRole ( 'ROLE_ANONYMOUS' )">ANONYMOUS</security:authorize>
+				<security:authorize access="hasAnyRole ( 'ROLE_ADMIN', 'ROLE_USER' )">NOT ANONYMOUS</security:authorize>
+			</h:form>
+		</h:body>
+	</f:view>
+</html>

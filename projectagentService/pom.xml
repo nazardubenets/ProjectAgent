@@ -23,11 +23,6 @@
 
 		<dependency>
 			<groupId>org.dubenets.projects</groupId>
-			<artifactId>projectagentUtility</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.dubenets.projects</groupId>
 			<artifactId>projectagentDAO</artifactId>
 			<type>ejb</type>
 		</dependency>

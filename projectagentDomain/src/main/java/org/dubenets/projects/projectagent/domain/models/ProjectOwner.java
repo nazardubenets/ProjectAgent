@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "ApplicationUser")
 @DiscriminatorValue("ProjectOwner")
-public class ProjectOwner extends User implements Serializable {
+public class ProjectOwner extends ApplicationUser implements Serializable {
 
 	private static final long serialVersionUID = 1024480758785642239L;
 

@@ -5,12 +5,12 @@ import java.util.List;
 import javax.ejb.Local;
 
 import org.dubenets.projects.projectagent.dao.generic.GenericDAO;
-import org.dubenets.projects.projectagent.domain.enums.UserRole;
-import org.dubenets.projects.projectagent.domain.models.User;
+import org.dubenets.projects.projectagent.domain.enums.Role;
+import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 
 @Local
-public interface UserDAOLocal extends GenericDAO<User> {
+public interface UserDAOLocal extends GenericDAO<ApplicationUser> {
 
-	public List<User> getUsersWithRoles(UserRole ... userRoles);	
+	public List<ApplicationUser> getUsersWithRoles(Role ... userRoles);	
 	
 }

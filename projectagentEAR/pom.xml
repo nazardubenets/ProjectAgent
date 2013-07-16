@@ -18,11 +18,6 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>projectagentUtility</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>projectagentDAO</artifactId>
 			<type>ejb</type>
 		</dependency>
@@ -55,12 +50,6 @@
 							<groupId>${project.groupId}</groupId>
 							<artifactId>projectagentDomain</artifactId>
 							<bundleFileName>projectagentDomain.jar</bundleFileName>
-						</jarModule>
-						
-						<jarModule>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>projectagentUtility</artifactId>
-							<bundleFileName>projectagentUtility.jar</bundleFileName>
 						</jarModule>
 						
 						<ejbModule>
