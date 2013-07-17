@@ -19,12 +19,18 @@
 				<h:inputText id="j_username" required="true"/>
 				<br />
 				<br />
-				<label for="j_password"> <h:outputText
-						value="#{ message.login_password }" /><br />
+				<label for="j_password"> 
+					<h:outputText value="#{ message.login_password }" />
+					<br />
 				</label>
 				<h:inputSecret id="j_password" required="true"/>
 				<br />
 				<br />
+				<h:selectBooleanCheckbox id="_spring_security_remember_me" />
+				<label for="_spring_security_remember_me">
+					<h:outputText value="Remember me" />
+					<br />
+				</label>
 				<h:commandButton type="submit" id="login"
 					action="#{authenticationBean.login}" value="Login" />
 	

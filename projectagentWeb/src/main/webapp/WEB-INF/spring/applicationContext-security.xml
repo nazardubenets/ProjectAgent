@@ -1,30 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<global-method-security secured-annotations="enabled" />
 
-	<http use-expressions="true" access-denied-page="/accessDenied.htm">
+	<http use-expressions="true" auto-config="false" entry-point-ref="authenticationEntryPoint"
+		authentication-manager-ref="authenticationManager">
 
 		<intercept-url pattern="/admin/**" access="hasRole ( 'ROLE_ADMIN' )" />
 
 		<intercept-url pattern="/user/**"
 			access="hasAnyRole ( 'ROLE_USER', 'ROLE_ADMIN')" />
 
-		<intercept-url pattern="/login.jspx" access="hasRole ( 'ROLE_ANONYMOUS' )" />
+		<access-denied-handler error-page="/accessDenied.htm"/>
 
-		<form-login login-processing-url="/j_spring_security_check"
-			login-page="/login.htm" default-target-url="/user/userWelcome.htm"
-			authentication-failure-url="/login.htm" />
-
-		<logout />
+		<custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
+		<custom-filter ref="rememberMeFilter" position="REMEMBER_ME_FILTER"/>
+  		<custom-filter ref="logoutFilter" position="LOGOUT_FILTER"/>
+  		
 	</http>
 
-	<authentication-manager>
-		<authentication-provider user-service-ref="userDetailsService">
-		</authentication-provider>
+	<authentication-manager id="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsService" />
+		<authentication-provider ref="rememberMeAuthenticationProvider" />
 	</authentication-manager>
+
+	<beans:bean id="authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
+		p:loginFormUrl="/login.htm" />
+
+	<beans:bean id="authenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
+		p:authenticationManager-ref="authenticationManager"
+		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"
+		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler"
+		p:rememberMeServices-ref="rememberMeServices" />
+
+	<beans:bean id="customAuthenticationFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+		p:defaultFailureUrl="/login.htm?error=true" />
+
+	<!-- We just actually need to set the default target url here -->
+	<beans:bean id="customAuthenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"
+		p:defaultTargetUrl="/user/userWelcome.htm" />
+
+	<beans:bean id="rememberMeFilter"
+		class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter"
+		p:rememberMeServices-ref="rememberMeServices"
+		p:authenticationManager-ref="authenticationManager" />
+
+	<beans:bean id="rememberMeServices"
+		class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices"
+		p:userDetailsService-ref="userDetailsService" p:key="_spring_security_remember_me"
+		p:tokenRepository-ref="tokenRepository" p:tokenValiditySeconds="864000" />
+
+	<beans:bean id="tokenRepository"
+		class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl"
+		p:dataSource-ref="dataSource" />
+
+	<beans:bean id="rememberMeAuthenticationProvider"
+		class="org.springframework.security.authentication.RememberMeAuthenticationProvider"
+		p:key="_spring_security_remember_me" />
+		
+	<beans:bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+ 		<beans:constructor-arg value="/" />
+ 		<beans:constructor-arg>
+			<beans:list>
+				<beans:ref bean="rememberMeServices" />
+				<beans:ref bean="securityContextLogoutHandler"/>
+			</beans:list>
+		</beans:constructor-arg>
+ 	</beans:bean>
+ 	
+ 	<beans:bean id="securityContextLogoutHandler" class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"
+ 		p:invalidateHttpSession="true"/>
 
 </beans:beans>
