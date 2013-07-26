@@ -44,7 +44,7 @@
 					<generatedDescriptorLocation>${basedir}/src/main/application/META-INF</generatedDescriptorLocation>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
 					<initializeInOrder>true</initializeInOrder>
-					<skinnyWars>true</skinnyWars>
+					<skinnyWars>false</skinnyWars>
 					<modules>
 						<jarModule>
 							<groupId>${project.groupId}</groupId>

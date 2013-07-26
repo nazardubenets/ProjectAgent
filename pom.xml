@@ -108,6 +108,12 @@
 				<version>${jboss.bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.jboss.spec.javax.faces</groupId>
+						<artifactId>jboss-jsf-api_2.1_spec</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<!-- JSR-303 (Bean Validation) Implementation -->
@@ -393,7 +399,7 @@
 						<artifactId>tools</artifactId>
 						<version>1.6</version>
 						<scope>system</scope>
-						<systemPath>${java.home}/../lib/tools.jar</systemPath>
+						<systemPath>${java.home}\..\lib\tools.jar</systemPath>
 					</dependency>
 				</dependencies>
 			</plugin>

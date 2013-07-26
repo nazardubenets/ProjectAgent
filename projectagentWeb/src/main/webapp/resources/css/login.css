@@ -1,0 +1,70 @@
+@CHARSET "ISO-8859-1";
+/*form styles*/
+#loginForm {
+	width: 400px;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+
+#loginForm  fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	
+	/*stacking fieldsets above each other*/
+	position: absolute;
+}
+
+#loginForm input[type=text], #loginForm input[type=password], #loginForm textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 1px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	font-family: montserrat;
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+}
+
+#loginForm input[type=text]:focus, #loginForm input[type=password]:focus, #loginForm textarea:focus{
+	border:1px solid rgba(39,174,96, 0.8);
+}
+
+#loginForm .login-command-button {
+	width: 100px;
+	background: rgba(39,174,96, 0.8);
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+#loginForm .login-command-button:hover, #loginForm .login-command-button:focus,#loginForm .login-command-button:active  {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(39,174,96, 0.8);
+}
+
+#loginForm .login-command-button:active {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(39,174,96, 0.8);
+	background: rgba(39,174,96, 0.9);
+}
+
+#loginForm  .login-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: rgba(44,62,80, 1.0);
+	margin-bottom: 15px;
+}

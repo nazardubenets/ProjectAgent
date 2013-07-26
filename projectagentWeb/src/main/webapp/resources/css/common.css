@@ -1,0 +1,64 @@
+@CHARSET "ISO-8859-1";
+/*custom font*/
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+/*basic reset*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+	/*Image only BG fallback*/
+	background: rgba(203, 243, 155, 1);
+}
+
+body {
+	font-family: montserrat, arial, verdana;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.squared-checkbox {
+	display: block;
+	margin-top:5px;
+	margin-bottom:10px;
+	line-height: 16px;
+	margin-right: 5px;
+}
+.squared-checkbox .checkbox-icon, .squared-checkbox .checkbox-textLabel, .squared-checkbox {
+	cursor: pointer;
+}
+.squared-checkbox .checkbox-icon {
+	display: inline-block;
+	position: relative;
+	width: 10px;
+	height: 10px;
+	background: rgba(255, 255, 255, 1);
+	box-shadow: 0 0 0 1px white, 0 0 0 2px #ccc;
+}
+
+.squared-checkbox:hover  .checkbox-icon{
+	box-shadow: 0 0 0 1px white, 0 0 0 2px rgba(39,174,96, 0.8);
+}
+
+.squared-checkbox input{
+	display:none;
+}
+
+.checkbox-textLabel {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	padding-left: 10px;
+}
+
+.squared-checkbox input[type=checkbox]:checked + .checkbox-icon {
+	background:rgba(39,174,96, 1.0);
+}
