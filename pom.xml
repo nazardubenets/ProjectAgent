@@ -52,7 +52,7 @@
 		<spring.faces.version>2.3.2.RELEASE</spring.faces.version>
 		<jackson.mapper.asl.version>1.9.12</jackson.mapper.asl.version>
 		<jboss.logging.version>3.1.0.GA</jboss.logging.version>
-		<lombok.version>0.11.8</lombok.version>
+		<lombok.version>1.12.6</lombok.version>
 		<junit.version>4.11</junit.version>
 		<mockito.all.version>1.9.5</mockito.all.version>
 	</properties>
@@ -338,6 +338,71 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven.surefire.plugin.version}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok-maven-plugin</artifactId>
+					<version>${lombok.version}.0</version>
+					<executions>
+						<execution>
+							<id>delombok</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>delombok</goal>
+							</goals>
+							<configuration>
+								<addOutputDirectory>false</addOutputDirectory>
+								<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+								<outputDirectory>${project.build.directory}/generated-sources/annotations</outputDirectory>
+							</configuration>
+						</execution>
+						<execution>
+							<id>test-delombok</id>
+							<phase>generate-test-sources</phase>
+							<goals>
+								<goal>testDelombok</goal>
+							</goals>
+							<configuration>
+								<addOutputDirectory>false</addOutputDirectory>
+								<sourceDirectory>${project.basedir}/src/test/java</sourceDirectory>
+								<outputDirectory>${project.build.directory}/generated-sources/test-annotations</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>sun.jdk</groupId>
+							<artifactId>tools</artifactId>
+							<version>1.6</version>
+							<scope>system</scope>
+							<systemPath>${java.home}\..\lib\tools.jar</systemPath>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin> 
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.projectlombok</groupId>
+										<artifactId>lombok-maven-plugin</artifactId>
+										<versionRange>[${lombok.version}.0,)</versionRange>
+										<goals>
+											<goal>delombok</goal>
+											<goal>testDelombok</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration> 
+		        </plugin> 
 			</plugins>
 		</pluginManagement>
 
@@ -366,45 +431,8 @@
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
-				<version>0.11.8.0</version>
-				<executions>
-					<execution>
-						<id>delombok</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>delombok</goal>
-						</goals>
-						<configuration>
-							<addOutputDirectory>false</addOutputDirectory>
-							<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-							<outputDirectory>${project.build.directory}/generated-sources/annotations</outputDirectory>
-						</configuration>
-					</execution>
-					<execution>
-						<id>test-delombok</id>
-						<phase>generate-test-sources</phase>
-						<goals>
-							<goal>testDelombok</goal>
-						</goals>
-						<configuration>
-							<addOutputDirectory>false</addOutputDirectory>
-							<sourceDirectory>${project.basedir}/src/test/java</sourceDirectory>
-							<outputDirectory>${project.build.directory}/generated-sources/test-annotations</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>sun.jdk</groupId>
-						<artifactId>tools</artifactId>
-						<version>1.6</version>
-						<scope>system</scope>
-						<systemPath>${java.home}\..\lib\tools.jar</systemPath>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
-
 	</build>
 
 	<profiles>
