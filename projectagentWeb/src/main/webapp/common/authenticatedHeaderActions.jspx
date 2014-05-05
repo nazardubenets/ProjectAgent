@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<div class="logoutLink">
+			<h:commandLink id="logout_link" action="#{authenticationBean.logout}"
+				value="#{ message.logout }" />
+		</div>
+		<div class="loginText">
+			<h:outputText id="logged-user-mail"
+				value="#{authenticationBean.principal.username}" />
+		</div>
+	</ui:composition>
+</h:body>
+</html>
+

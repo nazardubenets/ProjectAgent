@@ -10,8 +10,6 @@
 
 html {
 	height: 100%;
-	/*Image only BG fallback*/
-	background: rgba(203, 243, 155, 1);
 }
 
 body {
@@ -25,9 +23,27 @@ button:focus {
     outline: none;
 }
 
+.404container{
+	width:100%;
+	height:400px;
+	background: url("#{resource['img/404.png']}");
+}
+
+.403container{
+	width:100%;
+	height:400px;
+	background: url("#{resource['img/403.jpeg']}");
+}
+
+.500container{
+	width:100%;
+	height:400px;
+	background: url("#{resource['img/500.jpeg']}");
+}
+
 .squared-checkbox {
 	display: block;
-	margin-top:5px;
+	margin-top:15px;
 	margin-bottom:10px;
 	line-height: 16px;
 	margin-right: 5px;
@@ -45,7 +61,7 @@ button:focus {
 }
 
 .squared-checkbox:hover  .checkbox-icon{
-	box-shadow: 0 0 0 1px white, 0 0 0 2px rgba(39,174,96, 0.8);
+	box-shadow: 0 0 0 1px white, 0 0 0 2px rgba(102,179,73, 0.8);
 }
 
 .squared-checkbox input{
@@ -60,5 +76,15 @@ button:focus {
 }
 
 .squared-checkbox input[type=checkbox]:checked + .checkbox-icon {
-	background:rgba(39,174,96, 1.0);
+	background:rgba(39,115,50, 1.0);
+}
+
+.loginErrorMessage {
+	color:red;
+	font-size:11px
+}
+
+.ui-inputfield, .ui-chkbox-box{
+	color:black !important;
+	background: white !important;
 }

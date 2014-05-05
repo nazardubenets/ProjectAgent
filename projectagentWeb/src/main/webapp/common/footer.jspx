@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<div id="cent">
+			<div id="EPAM_logo"></div>
+			<ul class="footerMenuRow">
+				<li><a href="#"><div>AAAAAAA</div></a></li>
+				<li><a href="#"><div>BBBBBBBB</div></a></li>
+				<li><a href="#"><div>CCCCCC</div></a></li>
+				<li><a href="#"><div>FFFFFFFF</div></a></li>
+			</ul>
+			<span id="contactAdministrator"> <a>Contact administrator</a>
+			</span> <span id="copyright">1993 - 2001
+			</span>
+		</div>
+	</ui:composition>
+</h:body>
+</html>
+

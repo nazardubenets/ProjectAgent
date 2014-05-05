@@ -20,5 +20,21 @@
 
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
+	<navigation-rule>
+		<from-view-id>/user/common/*</from-view-id>
+		<navigation-case>
+			<from-outcome>createOrUpdateProject</from-outcome>
+			<to-view-id>/user/projectowner/project/createOrUpdate.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/user/projectowner/project/createOrUpdate.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>main</from-outcome>
+			<to-view-id>/user/common/main.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

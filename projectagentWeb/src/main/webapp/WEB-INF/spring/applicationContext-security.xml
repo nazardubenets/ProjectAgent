@@ -17,7 +17,7 @@
 		<intercept-url pattern="/user/**"
 			access="hasAnyRole ( 'ROLE_USER', 'ROLE_ADMIN')" />
 
-		<access-denied-handler error-page="/accessDenied.htm"/>
+		<access-denied-handler error-page="/error/403.htm"/>
 
 		<custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
 		<custom-filter ref="rememberMeFilter" position="REMEMBER_ME_FILTER"/>
@@ -48,7 +48,7 @@
 	<!-- We just actually need to set the default target url here -->
 	<beans:bean id="customAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"
-		p:defaultTargetUrl="/user/userWelcome.htm" />
+		p:defaultTargetUrl="/user/common/main.htm" />
 
 	<beans:bean id="rememberMeFilter"
 		class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter"

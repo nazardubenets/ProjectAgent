@@ -9,6 +9,13 @@
 
 <f:view>
 	<h:head>
+		<security:authorize access="hasRole ( 'ROLE_ADMIN' )">
+			<script>window.location.replace("./admin/adminWelcome.htm");</script>
+		</security:authorize>
+		<security:authorize access="hasRole ( 'ROLE_USER' )">
+			<script>window.location.replace("./user/common/main.htm");</script>
+		</security:authorize>
+		
 		<h:outputStylesheet library="css" name="common.css" />
 		<h:outputStylesheet library="css" name="login.css" />
 
@@ -17,27 +24,32 @@
 			target="body" />
 	</h:head>
 	<h:body>
-		<security:authorize access="hasRole ( 'ROLE_ANONYMOUS' )">
-			<h:messages />
-			<h:form id="loginForm" prependId="false">
-				<fieldset>
-					<h2 class="login-title">#{message.login_title}</h2>
-					<h:inputText id="j_username" required="true"
-						p:placeholder="#{message.login_username}" />
-					<h:inputSecret id="j_password" required="true"
-						p:placeholder="#{message.login_password}" />
-					<div class="squared-checkbox">
-						<h:selectBooleanCheckbox id="_spring_security_remember_me" />
-						<h:outputLabel styleClass="checkbox-icon" for="_spring_security_remember_me" />
-						<h:outputLabel styleClass="checkbox-textLabel" value="#{message.login_rememberMe}" for="_spring_security_remember_me"/>
-					</div>
-					<h:commandButton type="submit" styleClass="login-command-button"
-						value="#{message.common_submit}" action="#{authenticationBean.login}"/>
-					<h:commandButton type="reset" styleClass="login-command-button"
-						value="#{message.common_reset}" />
-				</fieldset>
-			</h:form>
-		</security:authorize>
+		<h:form id="loginForm" prependId="false">
+			<fieldset>
+				<h2 class="login-title">#{message.login_title}</h2>
+				<h:outputText rendered="#{not empty param.error}" value="#{sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}" styleClass="loginErrorMessage"/>
+				<h:inputText id="j_username" required="true"
+					p:placeholder="#{message.common_username}" requiredMessage="#{message.common_requiredUsername}" validatorMessage="#{message.common_incorrectUsername}">
+					<f:validateLength minimum="5" maximum="10" />
+				</h:inputText>
+				<h:message for="j_username" styleClass="loginErrorMessage" showSummary="true" showDetail="false"/>
+				<h:inputSecret id="j_password" required="true"
+					p:placeholder="#{message.common_password}" requiredMessage="#{message.common_requiredPassword}" validatorMessage="#{message.common_incorrectPassword}">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+				</h:inputSecret>
+				<h:message for="j_password" styleClass="loginErrorMessage" showSummary="true" showDetail="false"/>
+				<div class="squared-checkbox">
+					<h:selectBooleanCheckbox id="_spring_security_remember_me" />
+					<h:outputLabel styleClass="checkbox-icon" for="_spring_security_remember_me" />
+					<h:outputLabel styleClass="checkbox-textLabel" value="#{message.login_rememberMe}" for="_spring_security_remember_me"/>
+				</div>
+				<h:commandButton type="submit" styleClass="projectagent-command-button"
+					value="#{message.asEmplyee_submit}" action="#{authenticationBean.loginAsEmployee}"/>
+				<h:commandButton type="submit" styleClass="projectagent-command-button"
+					value="#{message.asProjectOwner_submit}" action="#{authenticationBean.loginAsProjectOwner}"/>
+				<h:button outcome="registration" styleClass="projectagent-command-button" value="#{message.registration_submit}" />
+			</fieldset>
+		</h:form>
 	</h:body>
 </f:view>
 </html>

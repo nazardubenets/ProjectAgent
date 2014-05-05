@@ -2,14 +2,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:prime="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:head>
 	</h:head>
 	<h:body>
 		<ui:composition template="/WEB-INF/templates/default.jspx">
 			<ui:define name="content">
-    			<h2>This is page1 content</h2>
+				<div class="500container"></div>
     		</ui:define>
 		</ui:composition>
 	</h:body>

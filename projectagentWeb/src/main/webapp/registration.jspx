@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:security="http://www.springframework.org/security/tags">
+
+<f:view>
+	<h:head>
+		<security:authorize access="hasRole ( 'ROLE_ADMIN' )">
+			<script>window.location.replace("./admin/adminWelcome.htm");</script>
+		</security:authorize>
+		<security:authorize access="hasRole ( 'ROLE_USER' )">
+			<script>window.location.replace("./user/userWelcome.htm");</script>
+		</security:authorize>
+		
+		<h:outputStylesheet library="css" name="common.css" />
+		<h:outputStylesheet library="css" name="login.css" />
+
+		<h:outputScript library="js" name="jquery-1.10.2.min.js" target="body" />
+		<h:outputScript library="js" name="jquery.easing.1.3.min.js"
+			target="body" />
+		<h:outputScript library="js" name="registration.js"
+			target="body" />
+	</h:head>
+	<h:body>
+		<h:form id="loginForm" prependId="false">
+			<fieldset>
+				<h2 class="login-title">#{message.registration_title}</h2>
+				<h:inputText id="username" required="true" value="#{registrationBean.user.username}"
+					p:placeholder="#{message.common_username}" requiredMessage="#{message.common_requiredUsername}" validatorMessage="#{message.common_incorrectUsername}">
+					<f:validateLength minimum="5" maximum="10" />
+				</h:inputText>
+				<h:message for="username" styleClass="loginErrorMessage" showSummary="true" showDetail="false"/>
+				<h:inputSecret id="password" required="true" value="#{registrationBean.user.password}"
+					p:placeholder="#{message.common_password}" requiredMessage="#{message.common_requiredPassword}" validatorMessage="#{message.common_incorrectPassword}">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+					<f:validator validatorId="confirmPasswordValidator" />
+					<f:attribute name="confirmPassword" value="#{confirmPassword}" />
+				</h:inputSecret>
+				<h:message for="password" styleClass="loginErrorMessage" showSummary="true" showDetail="false"/>
+				<h:inputSecret id="confirmPassword" required="true"
+					p:placeholder="#{message.registration_confirmPassword}" binding="#{confirmPassword}" requiredMessage="#{message.common_requiredConfirmPassword}" validatorMessage="#{message.common_incorrectConfirmPassword}">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+				</h:inputSecret>
+				<h:message for="confirmPassword" styleClass="loginErrorMessage" showSummary="true" showDetail="false"/>
+				<div class="squared-checkbox">
+					<h:selectBooleanCheckbox id="showPassword"/>
+					<h:outputLabel styleClass="checkbox-icon" for="showPassword" />
+					<h:outputLabel styleClass="checkbox-textLabel" value="#{message.registration_showPassword}" for="showPassword"/>
+				</div>
+				<h:commandButton type="submit" styleClass="projectagent-command-button"
+					value="#{message.asEmplyee_submit}" action="#{registrationBean.registerAsEmployee}"/>
+				<h:commandButton type="submit" styleClass="projectagent-command-button"
+					value="#{message.asProjectOwner_submit}" action="#{registrationBean.registerAsProjectOwner}"/>
+				<h:commandButton type="reset" styleClass="projectagent-command-button"
+					value="#{message.common_reset}" />
+			</fieldset>
+		</h:form>
+	</h:body>
+</f:view>
+</html>
+

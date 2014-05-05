@@ -12,6 +12,14 @@
 	<packaging>war</packaging>
 	<name>projectagentWeb</name>
 
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.dubenets.projects</groupId>
@@ -80,6 +88,17 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>  
+		    <groupId>org.primefaces.themes</groupId>  
+		    <artifactId>south-street</artifactId>  
+		    <version>1.0.10</version>  
+		</dependency>  
 	</dependencies>
 	<build>
 		<plugins>

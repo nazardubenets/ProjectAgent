@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 /*form styles*/
 #loginForm {
-	width: 400px;
+	width: 490px;
 	margin: 50px auto;
 	text-align: center;
 	position: relative;
@@ -27,7 +27,7 @@
 	padding: 15px;
 	border: 1px solid #ccc;
 	border-radius: 1px;
-	margin-bottom: 10px;
+	margin-top: 10px;
 	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -38,12 +38,12 @@
 }
 
 #loginForm input[type=text]:focus, #loginForm input[type=password]:focus, #loginForm textarea:focus{
-	border:1px solid rgba(39,174,96, 0.8);
+	border:1px solid rgba(39,115,50, 0.8);
 }
 
-#loginForm .login-command-button {
+.projectagent-command-button {
 	width: 100px;
-	background: rgba(39,174,96, 0.8);
+	background: rgba(102,179,73, 1.0);
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -53,13 +53,9 @@
 	margin: 10px 5px;
 }
 
-#loginForm .login-command-button:hover, #loginForm .login-command-button:focus,#loginForm .login-command-button:active  {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(39,174,96, 0.8);
-}
-
-#loginForm .login-command-button:active {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(39,174,96, 0.8);
-	background: rgba(39,174,96, 0.9);
+.projectagent-command-button:hover, .projectagent-command-button:focus, .projectagent-command-button:active  {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(39,115,50, 0.8);
+	background: rgba(39,115,50, 0.8);
 }
 
 #loginForm  .login-title {

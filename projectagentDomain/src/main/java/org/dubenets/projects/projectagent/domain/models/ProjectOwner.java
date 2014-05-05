@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true,exclude={"ownedProjects"})
 @Entity
 @Table(name = "ApplicationUser")
 @DiscriminatorValue("ProjectOwner")

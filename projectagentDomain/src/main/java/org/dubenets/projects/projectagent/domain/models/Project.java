@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import org.dubenets.projects.projectagent.domain.enums.ReadinessStage;
@@ -30,6 +31,7 @@ import org.dubenets.projects.projectagent.domain.enums.ReadinessStage;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude={"hiredGroups", "childProjects"})
 @Entity
 @Table(name = "project")
 public class Project implements Serializable {
@@ -47,13 +49,13 @@ public class Project implements Serializable {
 	@Column(columnDefinition = "TEXT", nullable = false)
 	private String description;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date creationTime;
+	@Temporal(TemporalType.DATE)
+	private Date creationTime = new Date();
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date startTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date endTime;
 	
 	@Enumerated(EnumType.STRING)
