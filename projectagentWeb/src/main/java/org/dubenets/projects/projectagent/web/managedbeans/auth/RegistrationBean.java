@@ -1,4 +1,4 @@
-package org.dubenets.projects.projectagent.web.auth.managedbeans;
+package org.dubenets.projects.projectagent.web.managedbeans.auth;
 
 import java.io.Serializable;
 

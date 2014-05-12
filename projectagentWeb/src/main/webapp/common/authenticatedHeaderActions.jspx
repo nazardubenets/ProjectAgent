@@ -9,8 +9,10 @@
 <h:body>
 	<ui:composition>
 		<div class="logoutLink">
-			<h:commandLink id="logout_link" action="#{authenticationBean.logout}"
-				value="#{ message.logout }" />
+			<h:form prependId="false">
+				<h:commandLink id="logout_link" action="#{authenticationBean.logout}"
+					value="#{ message.logout }" />
+			</h:form>
 		</div>
 		<div class="loginText">
 			<h:outputText id="logged-user-mail"

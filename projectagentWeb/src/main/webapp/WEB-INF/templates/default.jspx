@@ -5,62 +5,56 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:prime="http://primefaces.org/ui"
 	xmlns:security="http://www.springframework.org/security/tags">
-<h:head>
-	<title>ProjectAgent</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<h:outputStylesheet name="css/backEnd/screen.css" />
-</h:head>
-<h:body>
-	<h:form>
-	<div id="container">
-		<div id="header">
-			<div class="headerTop">
-				<ui:insert name="languageSelector">
-					<ui:include src="/common/language.jspx">
-					</ui:include>
-				</ui:insert>
-				<security:authorize access="isAuthenticated()">
+
+<f:view locale="#{languageBean.selectedLanguage}">
+	<h:head>
+		<title>ProjectAgent</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<h:outputStylesheet library="css" name="backEnd/screen.css" />
+		<h:outputStylesheet library="css" name="common.css" />
+	</h:head>
+	<h:body>
+		<div id="container">
+			<div id="header">
+				<div class="headerTop">
+					<ui:insert name="languageSelector">
+						<ui:include src="/common/language.jspx">
+						</ui:include>
+					</ui:insert>
 					<ui:insert name="authenticatedHeaderActions">
 						<ui:include src="/common/authenticatedHeaderActions.jspx">
 						</ui:include>
 					</ui:insert>
-				</security:authorize>
-				<security:authorize access="isAnonymous()">
-					<ui:insert name="notAuthenticatedHeaderActions">
-						<ui:include src="/common/notAuthenticatedHeaderActions.jspx">
-						</ui:include>
-					</ui:insert>
-				</security:authorize>
-			</div>
-			<div class="navbar">
-				<a href="../"><div class="logo"></div></a>
-				<div class="container">
-					<ul class="nav">
-						<li class="c0"><a href="#"><div>AAAAAAAAAAAA</div></a></li>
-						<li class="c2"><a
-							href="#"><div>BBBBBB</div></a></li>
-						<li class="c3"><a
-							href="#"><div>CCCCCCC</div></a></li>
-						<li class="c4"><a
-							href="#"><div>FFFFFFFF</div></a></li>
-					</ul>
 				</div>
+				<h:form prependId="false">
+				    <prime:menubar>
+				    	<prime:menuitem value="#{message.projects}" url="#" />
+				    	<prime:menuitem value="#{message.employees}" url="#" />
+				    	<prime:menuitem value="#{message.project_owners}" url="#" />
+				    	<prime:menuitem value="#{message.history}" url="#" />
+				    	<prime:menuitem value="#{message.profile}" url="#" />
+				    	<prime:menuitem value="#{message.about}" url="#" />
+				        <f:facet name="options">
+				            <prime:inputText style="margin-right:10px"/>
+				        </f:facet>
+				    </prime:menubar>
+				</h:form>
+			</div>
+			<div id="content">
+				<ui:insert name="content">
+					[Template content will be inserted here]
+				</ui:insert>
 			</div>
 		</div>
-		<div id="content">
-			<ui:insert name="content">
-				[Template content will be inserted here]
+		<div id="footer">
+			<ui:insert name="footer">
+				<ui:include src="/common/footer.jspx">
+				</ui:include>
 			</ui:insert>
 		</div>
-	</div>
-	<div id="footer">
-		<ui:insert name="footer">
-			<ui:include src="/common/footer.jspx">
-			</ui:include>
-		</ui:insert>
-	</div>
-	</h:form>
-</h:body>
+	</h:body>
+</f:view>
 </html>
 

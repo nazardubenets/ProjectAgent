@@ -1,10 +1,9 @@
-package org.dubenets.projects.projectagent.web.auth;
+package org.dubenets.projects.projectagent.web.utility;
 
 import javax.ejb.EJB;
 
 import org.dubenets.projects.projectagent.domain.models.Account;
 import org.dubenets.projects.projectagent.service.local.AccountServiceLocal;
-import org.dubenets.projects.projectagent.web.utility.AccountConverter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

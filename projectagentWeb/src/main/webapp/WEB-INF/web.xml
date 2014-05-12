@@ -70,14 +70,14 @@
 	<!-- Error pages -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
-		<location>/error/500.jspx</location>
+		<location>/error/500.htm</location>
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error/404.jspx</location>
+		<location>/error/404.htm</location>
 	</error-page>
 	<error-page>
 		<error-code>403</error-code>
-		<location>/error/403.jspx</location>
+		<location>/error/403.htm</location>
 	</error-page>
 </web-app>

@@ -7,12 +7,14 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:head>
-		<h:outputStylesheet library="css" name="common.css" />
 	</h:head>
 	<h:body>
 		<ui:composition template="/WEB-INF/templates/default.jspx">
 			<ui:define name="content">
-				<prime:button value="Create project" outcome="createOrUpdateProject"/>  
+				<h:form prependId="false">
+					<prime:button value="Create project" outcome="createOrUpdateProject"/>
+					<prime:button value="List projects" outcome="listProjects"/>
+				</h:form>
     		</ui:define>
 		</ui:composition>
 	</h:body>

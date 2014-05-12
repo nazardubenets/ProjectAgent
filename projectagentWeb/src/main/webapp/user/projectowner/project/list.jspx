@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:prime="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+	</h:head>
+	<h:body>
+		<ui:composition template="/WEB-INF/templates/default.jspx">
+			<ui:define name="content">
+				<prime:tabView id="projectTabs">
+					<prime:tab id="allProjectsTab" title="#{message.projects_allProjects}">
+						<h:form>
+							<prime:dataTable id="allProjects" var="project" value="#{listProjectsBean.allProjects}"
+				                 paginator="true" rows="10"
+				                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				                 rowsPerPageTemplate="5,10,15">
+						        <prime:column sortBy="name" headerText="#{message.project_name}">
+						            <h:outputText value="#{project.name}" />
+						        </prime:column>
+						
+						        <prime:column sortBy="projectOwner.account.username" headerText="#{message.common_projectOwner}">
+						            <h:outputText value="#{project.projectOwner.account.username}" />
+						        </prime:column>
+						
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_creationDate}" />
+						            </f:facet>
+						            <h:outputText value="#{project.creationTime}" />
+						        </prime:column>
+						
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_startDate}" />
+						            </f:facet>
+						            <h:outputText value="#{project.startTime}" />
+						        </prime:column>
+						        
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_endDate}" />
+						            </f:facet>
+						            <h:outputText value="#{project.endTime}" />
+						        </prime:column>
+						        
+						        <prime:column headerText="#{message.project_stage}">
+						            <h:outputText value="#{project.readinessStage}" />
+						        </prime:column>
+						    </prime:dataTable>
+						</h:form>
+					</prime:tab>
+					<prime:tab id="myProjectsTab" title="#{message.projects_myProjects}">
+						<h:form>
+							<prime:dataTable id="myProjects" var="myProject" value="#{listProjectsBean.myProjects}"
+				                 paginator="true" rows="10"
+				                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				                 rowsPerPageTemplate="5,10,15">
+						        
+						        <prime:column sortBy="name" headerText="#{message.project_name}">
+						            <h:outputText value="#{myProject.name}" />
+						        </prime:column>
+						        
+						        <prime:column headerText="#{message.project_creationDate}">
+						            <h:outputText value="#{myProject.creationTime}" />
+						        </prime:column>
+						
+						        <prime:column headerText="#{message.project_startDate}">
+						            <h:outputText value="#{myProject.startTime}" />
+						        </prime:column>
+						        
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_endDate}" />
+						            </f:facet>
+						            <h:outputText value="#{myProject.endTime}" />
+						        </prime:column>
+						        
+						        <prime:column headerText="#{message.project_stage}">
+						            <h:outputText value="#{myProject.readinessStage}" />
+						        </prime:column>
+						        
+						        <prime:column headerText="#{message.common_actions}">
+						            <prime:button outcome="createOrUpdate" icon="ui-icon-star" title="Icon Only">
+									    <f:param name="projectID" value="#{myProject.id}" />
+									</prime:button>
+						        </prime:column>
+						    </prime:dataTable>
+						</h:form>
+					</prime:tab>
+				</prime:tabView>
+    		</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

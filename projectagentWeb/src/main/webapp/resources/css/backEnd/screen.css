@@ -88,12 +88,6 @@ tbody {
 	color: #F07F3F;
 }
 
-#header .ui-widget-content {
-	border: 0 none !important;
-	border-radius:0px;
-	padding: 0 !important;
-}
-
 #header .left_side {
 	float: left;
 }
@@ -129,10 +123,9 @@ tbody {
 #header .languageContainer {
 	position: relative;
 	top: 6.5px;
-	width: 85px;
-	height: 60%;
 	float: right;
 	margin-left: 10px;
+	font-size: 12px;
 }
 
 #header .languageContainer form {

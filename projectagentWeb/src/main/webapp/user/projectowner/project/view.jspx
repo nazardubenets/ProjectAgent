@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:prime="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+	</h:head>
+	<h:body>
+		<ui:composition template="/WEB-INF/templates/default.jspx">
+			<ui:define name="content">
+					<h:form prependId="false">
+						<prime:panel header="Masks">
+					        <h:panelGrid columns="2" cellpadding="5">  
+					            <h:outputText value="Name: " />  
+					            <prime:inputText value="#{createOrEditProjectBean.project.name}"/>
+					              
+					            <h:outputText value="Description: " />  
+					            <prime:editor id="editor" value="#{createOrEditProjectBean.project.description}" width="600"/>
+					              
+					            <h:outputText value="Start date: " />  
+					            <prime:calendar value="#{createOrEditProjectBean.project.startTime}" id="startDate" mindate="new Date();" maxdate="#{createOrEditProjectBean.project.endTime}">
+					            	<prime:ajax event="dateSelect" update="endDate" />
+					            </prime:calendar>
+					            
+					            <h:outputText value="End date: " />  
+					            <prime:calendar value="#{createOrEditProjectBean.project.endTime}" id="endDate" mindate="#{createOrEditProjectBean.project.startTime}">
+					            	 <prime:ajax event="dateSelect" update="startDate" />  
+					            </prime:calendar>
+					          
+					            <h:commandButton type="submit" value="Submit" action="#{createOrEditProjectBean.saveProject}" class="projectagent-command-button"/>  
+					            <h:commandButton value="Reset" type="reset" class="projectagent-command-button"/>  
+					        </h:panelGrid>  
+					    </prime:panel>
+					</h:form>
+    		</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

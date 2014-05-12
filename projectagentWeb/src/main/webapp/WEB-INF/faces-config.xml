@@ -36,5 +36,12 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-
+	<navigation-rule>
+		<from-view-id>/user/common/main.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>listProjects</from-outcome>
+			<to-view-id>/user/projectowner/project/list.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

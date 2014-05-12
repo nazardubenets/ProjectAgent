@@ -52,9 +52,9 @@
 					<h:outputLabel styleClass="checkbox-textLabel" value="#{message.registration_showPassword}" for="showPassword"/>
 				</div>
 				<h:commandButton type="submit" styleClass="projectagent-command-button"
-					value="#{message.asEmplyee_submit}" action="#{registrationBean.registerAsEmployee}"/>
+					value="#{message.common_employee}" action="#{registrationBean.registerAsEmployee}"/>
 				<h:commandButton type="submit" styleClass="projectagent-command-button"
-					value="#{message.asProjectOwner_submit}" action="#{registrationBean.registerAsProjectOwner}"/>
+					value="#{message.common_projectOwner}" action="#{registrationBean.registerAsProjectOwner}"/>
 				<h:commandButton type="reset" styleClass="projectagent-command-button"
 					value="#{message.common_reset}" />
 			</fieldset>

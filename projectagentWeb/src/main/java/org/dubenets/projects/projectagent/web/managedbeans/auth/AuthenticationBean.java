@@ -1,4 +1,4 @@
-package org.dubenets.projects.projectagent.web.auth.managedbeans;
+package org.dubenets.projects.projectagent.web.managedbeans.auth;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
@@ -25,7 +25,7 @@ import org.dubenets.projects.projectagent.web.utility.SpringSecurityUtility;
 import org.dubenets.projects.projectagent.web.utility.helpermodels.UserDetailsAccount;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class AuthenticationBean implements Serializable{
 	
 	@EJB

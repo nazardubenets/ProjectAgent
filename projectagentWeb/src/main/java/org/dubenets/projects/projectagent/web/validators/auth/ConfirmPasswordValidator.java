@@ -1,4 +1,4 @@
-package org.dubenets.projects.projectagent.web.auth.validators;
+package org.dubenets.projects.projectagent.web.validators.auth;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;

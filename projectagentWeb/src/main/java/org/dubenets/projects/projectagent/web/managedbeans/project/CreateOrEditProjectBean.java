@@ -1,4 +1,4 @@
-package org.dubenets.projects.projectagent.web.project;
+package org.dubenets.projects.projectagent.web.managedbeans.project;
 
 import java.io.Serializable;
 

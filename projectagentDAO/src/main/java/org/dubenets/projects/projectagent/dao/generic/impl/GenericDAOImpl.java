@@ -2,6 +2,7 @@ package org.dubenets.projects.projectagent.dao.generic.impl;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
@@ -64,7 +65,11 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T>{
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityType);
 		Root<T> root = criteriaQuery.from(entityType);
 		criteriaQuery.select(root);
-		return entityManager.createQuery(criteriaQuery).getResultList();
+		List<T> result = entityManager.createQuery(criteriaQuery).getResultList();
+		if (result == null) {
+			result = new ArrayList<T>();
+		}
+		return result;
 	}
 
 }
