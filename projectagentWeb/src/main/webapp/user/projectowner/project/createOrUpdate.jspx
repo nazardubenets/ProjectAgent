@@ -30,8 +30,8 @@
 				            	 <prime:ajax event="dateSelect" update="startDate" />  
 				            </prime:calendar>
 				          
-				            <h:commandButton type="submit" value="#{message.common_save}" action="#{createOrEditProjectBean.saveProject}" class="projectagent-command-button"/>  
-				            <h:commandButton type="reset" value="#{message.common_reset}" class="projectagent-command-button"/>  
+				            <h:commandButton type="submit" value="#{message.common_save}" action="#{createOrEditProjectBean.saveProject}" styleClass="projectagent-command-button"/>  
+				            <h:commandButton type="reset" value="#{message.common_reset}" styleClass="projectagent-command-button"/>  
 				        </h:panelGrid>  
 				    </prime:panel>
 				</h:form>

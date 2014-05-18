@@ -13,7 +13,8 @@
 			<ui:define name="content">
 				<h:form prependId="false">
 					<prime:button value="Create project" outcome="createOrUpdateProject"/>
-					<prime:button value="List projects" outcome="listProjects"/>
+					<prime:button value="Owner projects" outcome="listProjects"/>
+					<prime:button value="Employee projects" outcome="listEmployeeProjects"/>
 				</h:form>
     		</ui:define>
 		</ui:composition>

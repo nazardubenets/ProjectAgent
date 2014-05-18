@@ -10,8 +10,9 @@
 	<ui:composition>
 		<div class="languageContainer">
 			<h:form prependId="false">
-				<prime:selectOneMenu value="#{languageBean.selectedLanguage}" onchange="this.form.submit()" valueChangeListener="#{languageBean.changeLanguage}" panelStyle="width:90px" style="width:100px">
+				<prime:selectOneMenu value="#{languageBean.selectedLanguage}" valueChangeListener="#{languageBean.changeLanguage}" panelStyle="width:90px" style="width:100px">
 		            <f:selectItems value="#{languageBean.languages}"/>
+		            <prime:ajax event="change" onsuccess="document.location.reload()"/>
 		        </prime:selectOneMenu>
 			</h:form>
 		</div>

@@ -14,7 +14,7 @@
 				<prime:tabView id="projectTabs">
 					<prime:tab id="allProjectsTab" title="#{message.projects_allProjects}">
 						<h:form>
-							<prime:dataTable id="allProjects" var="project" value="#{listProjectsBean.allProjects}"
+							<prime:dataTable id="allProjects" var="project" value="#{listProjectsForProjectOwnerBean.allProjects}"
 				                 paginator="true" rows="10"
 				                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				                 rowsPerPageTemplate="5,10,15">
@@ -55,7 +55,7 @@
 					</prime:tab>
 					<prime:tab id="myProjectsTab" title="#{message.projects_myProjects}">
 						<h:form>
-							<prime:dataTable id="myProjects" var="myProject" value="#{listProjectsBean.myProjects}"
+							<prime:dataTable id="myProjects" var="myProject" value="#{listProjectsForProjectOwnerBean.myProjects}"
 				                 paginator="true" rows="10"
 				                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				                 rowsPerPageTemplate="5,10,15">

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:prime="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+	</h:head>
+	<h:body>
+		<ui:composition template="/WEB-INF/templates/default.jspx">
+			<ui:define name="content">
+				<h:outputScript library="js" name="user/employee/project/list.js" target="body" />
+				<h:form prependId="false" id="mainForm">
+					<prime:tabView id="temp">
+						<prime:tab id="allProjectsTab" title="#{message.projects_allProjects}">
+							<prime:dataScroller id="allProjects" var="project" value="#{listProjectsForEmployeeBean.allProjects}" chunkSize="3">
+								<f:facet name="loader">
+						            <prime:commandButton type="button" value="More" styleClass="projectagent-command-button">
+						            	<prime:ajax event="click" onsuccess="unescapseDescription()"/>
+						            </prime:commandButton>
+						        </f:facet>
+								<prime:panel header="#{project.name}">
+									<h:panelGrid columns="1" style="width:33%">
+										<h:panelGrid columns="2">
+											<h:outputText value="#{message.common_projectOwner}" />
+											<h:outputText value="#{project.projectOwner.account.username}" />
+										</h:panelGrid>
+										<h:panelGrid columns="2">
+											<h:outputText value="#{message.project_description}" />
+											<h:panelGroup styleClass="projectDescription">
+												<h:outputText value="#{project.description}" />
+											</h:panelGroup>
+										</h:panelGrid>
+										<h:panelGrid columns="2">
+											<h:outputText value="#{message.project_startDate}" />
+											<h:outputText value="#{project.startTime}" />
+										</h:panelGrid>
+										<h:panelGrid columns="2">
+											<h:outputText value="#{message.project_endDate}" />
+											<h:outputText value="#{project.endTime}" />
+										</h:panelGrid>
+										<h:panelGrid columns="2">
+											<h:outputText value="#{message.project_stage}" />
+											<h:outputText value="#{project.readinessStage}" />
+										</h:panelGrid>
+										<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.signFor(project)}" ajax="true" update=":mainForm:temp">
+											<prime:ajax event="click" onsuccess="unescapseDescription()"/>
+										</prime:commandButton>
+									</h:panelGrid>	
+								</prime:panel>
+						    </prime:dataScroller>
+						</prime:tab>
+						<prime:tab id="myProjectsTab" title="#{message.projects_myProjects}">
+							<prime:dataScroller id="myProjects" var="project" value="#{listProjectsForEmployeeBean.myProjects}" chunkSize="3">
+								<f:facet name="loader">
+						            <prime:commandButton type="button" value="More" styleClass="projectagent-command-button">
+						            	<prime:ajax event="click" onsuccess="unescapseDescription()"/>
+						            </prime:commandButton>
+						        </f:facet>
+								<prime:panel header="#{project.name}">
+									<h:panelGrid columns="2">
+										<h:outputText value="#{message.common_projectOwner}" />
+										<h:outputText value="#{project.projectOwner.account.username}" />
+									</h:panelGrid>
+									<h:panelGrid columns="2">
+										<h:outputText value="#{message.project_description}" />
+										<h:panelGroup styleClass="projectDescription">
+											<h:outputText value="#{project.description}" />
+										</h:panelGroup>
+									</h:panelGrid>
+									<h:panelGrid columns="2">
+										<h:outputText value="#{message.project_startDate}" />
+										<h:outputText value="#{project.startTime}" />
+									</h:panelGrid>
+									<h:panelGrid columns="2">
+										<h:outputText value="#{message.project_endDate}" />
+										<h:outputText value="#{project.endTime}" />
+									</h:panelGrid>
+									<h:panelGrid columns="2">
+										<h:outputText value="#{message.project_stage}" />
+										<h:outputText value="#{project.readinessStage}" />
+									</h:panelGrid>
+									<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.unsignFrom(project)}" ajax="true" update=":mainForm:temp">
+										<prime:ajax event="click" onsuccess="unescapseDescription()"/>
+									</prime:commandButton>
+								</prime:panel>
+						    </prime:dataScroller>
+						</prime:tab>
+					</prime:tabView>
+				</h:form>
+    		</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

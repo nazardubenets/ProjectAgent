@@ -30,7 +30,7 @@
 				</div>
 				<h:form prependId="false">
 				    <prime:menubar>
-				    	<prime:menuitem value="#{message.projects}" url="#" />
+				    	<prime:menuitem value="#{message.projects}" outcome="listEmployeeProjects" />
 				    	<prime:menuitem value="#{message.employees}" url="#" />
 				    	<prime:menuitem value="#{message.project_owners}" url="#" />
 				    	<prime:menuitem value="#{message.history}" url="#" />
