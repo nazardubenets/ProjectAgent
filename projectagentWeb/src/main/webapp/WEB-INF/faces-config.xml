@@ -21,31 +21,22 @@
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
 	<navigation-rule>
-		<from-view-id>/user/*</from-view-id>
+		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>createOrUpdateProject</from-outcome>
 			<to-view-id>/user/projectowner/project/createOrUpdate.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/user/*</from-view-id>
 		<navigation-case>
 			<from-outcome>main</from-outcome>
 			<to-view-id>/user/common/main.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/user/*</from-view-id>
 		<navigation-case>
 			<from-outcome>listProjects</from-outcome>
 			<to-view-id>/user/projectowner/project/list.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/user/*</from-view-id>
 		<navigation-case>
 			<from-outcome>listEmployeeProjects</from-outcome>
 			<to-view-id>/user/employee/project/list.jspx</to-view-id>

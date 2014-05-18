@@ -11,7 +11,7 @@
 	<h:body>
 		<ui:composition template="/WEB-INF/templates/default.jspx">
 			<ui:define name="content">
-				<div class="404container"></div>
+				<div class="container404"></div>
     		</ui:define>
 		</ui:composition>
 	</h:body>

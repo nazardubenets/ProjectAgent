@@ -17,22 +17,22 @@ button:focus {
     outline: none;
 }
 
-.404container{
+.container404{
 	width:100%;
 	height:400px;
 	background: url("#{resource['img/404.png']}");
 }
 
-.403container{
+.container403{
 	width:100%;
 	height:400px;
-	background: url("#{resource['img/403.jpeg']}");
+	background: url("#{resource['img/403.jpg']}");
 }
 
-.500container{
+.container500{
 	width:100%;
 	height:400px;
-	background: url("#{resource['img/500.jpeg']}");
+	background: url("#{resource['img/500.jpg']}");
 }
 
 .projectagent-command-button {

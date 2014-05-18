@@ -10,12 +10,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,7 +33,8 @@ import org.dubenets.projects.projectagent.domain.enums.ReadinessStage;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude={"hiredGroups", "childProjects"})
+//@EqualsAndHashCode(exclude={"hiredGroups", "childProjects"})
+@EqualsAndHashCode(exclude={"hiredEmployees"})
 @Entity
 @Table(name = "project")
 public class Project implements Serializable {
@@ -64,14 +67,19 @@ public class Project implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "projectOwner_id", referencedColumnName = "id")
 	private ProjectOwner projectOwner;
-
-	@OneToMany(mappedBy = "orderedProject", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
-	private Set<Group> hiredGroups = new LinkedHashSet<Group>();
-
-	@OneToMany(mappedBy = "parentProject", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.REMOVE}, orphanRemoval = true)
-	private Set<Project> childProjects = new LinkedHashSet<Project>();
 	
-	@ManyToOne
-	@JoinColumn(name = "parentProject_id", referencedColumnName = "id", nullable = true)
-	private Project parentProject;
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH }, fetch = FetchType.EAGER)
+	@JoinTable(joinColumns = { @JoinColumn(name = "projectId", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "employeeId", referencedColumnName = "id") })
+	private Set<Employee> hiredEmployees = new LinkedHashSet<Employee>();
+
+
+//	@OneToMany(mappedBy = "orderedProject", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+//	private Set<Group> hiredGroups = new LinkedHashSet<Group>();
+//
+//	@OneToMany(mappedBy = "parentProject", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.REMOVE}, orphanRemoval = true)
+//	private Set<Project> childProjects = new LinkedHashSet<Project>();
+//	
+//	@ManyToOne
+//	@JoinColumn(name = "parentProject_id", referencedColumnName = "id", nullable = true)
+//	private Project parentProject;
 }

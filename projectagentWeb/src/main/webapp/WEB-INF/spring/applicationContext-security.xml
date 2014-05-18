@@ -16,6 +16,8 @@
 
 		<intercept-url pattern="/user/**"
 			access="hasAnyRole ( 'ROLE_USER', 'ROLE_ADMIN')" />
+		
+		<intercept-url pattern="/error/**" access="isAuthenticated()" />
 
 		<access-denied-handler error-page="/error/403.htm"/>
 

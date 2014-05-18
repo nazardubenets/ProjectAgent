@@ -8,7 +8,7 @@ public class JSFUtility {
 	public static void sendError(int code, String message) {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
-					.responseSendError(403, message);
+					.responseSendError(code, message);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

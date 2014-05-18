@@ -16,11 +16,6 @@
 					<prime:tabView id="temp">
 						<prime:tab id="allProjectsTab" title="#{message.projects_allProjects}">
 							<prime:dataScroller id="allProjects" var="project" value="#{listProjectsForEmployeeBean.allProjects}" chunkSize="3">
-								<f:facet name="loader">
-						            <prime:commandButton type="button" value="More" styleClass="projectagent-command-button">
-						            	<prime:ajax event="click" onsuccess="unescapseDescription()"/>
-						            </prime:commandButton>
-						        </f:facet>
 								<prime:panel header="#{project.name}">
 									<h:panelGrid columns="1" style="width:33%">
 										<h:panelGrid columns="2">
@@ -30,7 +25,7 @@
 										<h:panelGrid columns="2">
 											<h:outputText value="#{message.project_description}" />
 											<h:panelGroup styleClass="projectDescription">
-												<h:outputText value="#{project.description}" />
+												<h:outputText value="#{project.description}" escape="false"/>
 											</h:panelGroup>
 										</h:panelGrid>
 										<h:panelGrid columns="2">
@@ -45,20 +40,13 @@
 											<h:outputText value="#{message.project_stage}" />
 											<h:outputText value="#{project.readinessStage}" />
 										</h:panelGrid>
-										<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.signFor(project)}" ajax="true" update=":mainForm:temp">
-											<prime:ajax event="click" onsuccess="unescapseDescription()"/>
-										</prime:commandButton>
+										<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.signFor(project)}" ajax="true" update=":mainForm:temp" />
 									</h:panelGrid>	
 								</prime:panel>
 						    </prime:dataScroller>
 						</prime:tab>
 						<prime:tab id="myProjectsTab" title="#{message.projects_myProjects}">
 							<prime:dataScroller id="myProjects" var="project" value="#{listProjectsForEmployeeBean.myProjects}" chunkSize="3">
-								<f:facet name="loader">
-						            <prime:commandButton type="button" value="More" styleClass="projectagent-command-button">
-						            	<prime:ajax event="click" onsuccess="unescapseDescription()"/>
-						            </prime:commandButton>
-						        </f:facet>
 								<prime:panel header="#{project.name}">
 									<h:panelGrid columns="2">
 										<h:outputText value="#{message.common_projectOwner}" />
@@ -67,7 +55,7 @@
 									<h:panelGrid columns="2">
 										<h:outputText value="#{message.project_description}" />
 										<h:panelGroup styleClass="projectDescription">
-											<h:outputText value="#{project.description}" />
+											<h:outputText value="#{project.description}" escape="false"/>
 										</h:panelGroup>
 									</h:panelGrid>
 									<h:panelGrid columns="2">
@@ -82,9 +70,7 @@
 										<h:outputText value="#{message.project_stage}" />
 										<h:outputText value="#{project.readinessStage}" />
 									</h:panelGrid>
-									<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.unsignFrom(project)}" ajax="true" update=":mainForm:temp">
-										<prime:ajax event="click" onsuccess="unescapseDescription()"/>
-									</prime:commandButton>
+									<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.unsignFrom(project)}" ajax="true" update=":mainForm:temp" />
 								</prime:panel>
 						    </prime:dataScroller>
 						</prime:tab>
