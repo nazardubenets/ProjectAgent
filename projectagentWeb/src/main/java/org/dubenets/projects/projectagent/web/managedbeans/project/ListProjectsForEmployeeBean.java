@@ -9,13 +9,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.dubenets.projects.projectagent.domain.models.Employee;
+import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 import org.dubenets.projects.projectagent.domain.models.Project;
-import org.dubenets.projects.projectagent.service.local.EmployeeServiceLocal;
+import org.dubenets.projects.projectagent.service.local.ApplicationUserServiceLocal;
 import org.dubenets.projects.projectagent.service.local.ProjectServiceLocal;
-import org.dubenets.projects.projectagent.web.utility.JSFUtility;
 import org.dubenets.projects.projectagent.web.utility.SpringSecurityUtility;
-import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @ViewScoped
@@ -30,9 +28,9 @@ public class ListProjectsForEmployeeBean implements Serializable{
 	private ProjectServiceLocal projectServiceLocal;
 	
 	@EJB
-	private EmployeeServiceLocal employeeServiceLocal;
+	private ApplicationUserServiceLocal applicationUserServiceLocal;
 	
-	private Employee employee;
+	private ApplicationUser employee;
 	
 	private List<Project> allProjects;
 	
@@ -44,38 +42,29 @@ public class ListProjectsForEmployeeBean implements Serializable{
 	
 	@PostConstruct
 	public void initializeBean() {
-		Boolean isProjectOwner = (Boolean)JSFUtility.getSessionParameter("isProjectOwner");
-		if (!isProjectOwner) {
-			allProjects = projectServiceLocal.getAll();
-			employee = employeeServiceLocal.findById(SpringSecurityUtility.getPrincipal().getId());
-			for (Project project : allProjects) {
-				if (project.getHiredEmployees().contains(employee)) {
-					myProjects.add(project);
-				}
+		allProjects = projectServiceLocal.getAll();
+		employee = applicationUserServiceLocal.findById(SpringSecurityUtility.getPrincipal().getId());
+		for (Project project : allProjects) {
+			if (project.getHiredEmployees().contains(employee)) {
+				myProjects.add(project);
 			}
-			allProjects.removeAll(myProjects);
-		} else {
-			JSFUtility.sendError(403, "Only Employee can sign for projects.");
 		}
+		allProjects.removeAll(myProjects);
 	}
 	
 	public String signFor(Project project) {
 		project.getHiredEmployees().add(employee);
-		//employee.getPartisipatedProjects().add(project);
 		projectServiceLocal.update(project);
 		allProjects.remove(project);
 		myProjects.add(project);
-		RequestContext.getCurrentInstance().addCallbackParam("projectId", project.getId());
 		return null;
 	}
 	
 	public String unsignFrom(Project project) {
 		project.getHiredEmployees().remove(employee);
-		//employee.getPartisipatedProjects().remove(project);
 		projectServiceLocal.update(project);
 		myProjects.remove(project);
 		allProjects.add(project);
-		RequestContext.getCurrentInstance().addCallbackParam("projectId", project.getId());
 		return null;
 	}
 
@@ -85,6 +74,23 @@ public class ListProjectsForEmployeeBean implements Serializable{
 
 	public void setProjectServiceLocal(ProjectServiceLocal projectServiceLocal) {
 		this.projectServiceLocal = projectServiceLocal;
+	}
+
+	public ApplicationUserServiceLocal getApplicationUserServiceLocal() {
+		return applicationUserServiceLocal;
+	}
+
+	public void setApplicationUserServiceLocal(
+			ApplicationUserServiceLocal applicationUserServiceLocal) {
+		this.applicationUserServiceLocal = applicationUserServiceLocal;
+	}
+
+	public ApplicationUser getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(ApplicationUser employee) {
+		this.employee = employee;
 	}
 
 	public List<Project> getAllProjects() {

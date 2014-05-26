@@ -44,9 +44,7 @@
 					<h:outputLabel styleClass="checkbox-textLabel" value="#{message.login_rememberMe}" for="_spring_security_remember_me"/>
 				</div>
 				<h:commandButton type="submit" styleClass="projectagent-command-button"
-					value="#{message.common_employee}" action="#{authenticationBean.loginAsEmployee}"/>
-				<h:commandButton type="submit" styleClass="projectagent-command-button"
-					value="#{message.common_projectOwner}" action="#{authenticationBean.loginAsProjectOwner}"/>
+					value="#{message.login_submit}" action="#{authenticationBean.login}"/>
 				<h:button outcome="registration" styleClass="projectagent-command-button" value="#{message.registration_submit}" />
 			</fieldset>
 		</h:form>

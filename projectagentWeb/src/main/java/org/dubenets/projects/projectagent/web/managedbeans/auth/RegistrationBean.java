@@ -6,11 +6,10 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.dubenets.projects.projectagent.domain.enums.Role;
 import org.dubenets.projects.projectagent.domain.models.Account;
-import org.dubenets.projects.projectagent.domain.models.Employee;
-import org.dubenets.projects.projectagent.domain.models.ProjectOwner;
-import org.dubenets.projects.projectagent.service.local.EmployeeServiceLocal;
-import org.dubenets.projects.projectagent.service.local.ProjectOwnerServiceLocal;
+import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
+import org.dubenets.projects.projectagent.service.local.ApplicationUserServiceLocal;
 
 @ManagedBean
 @ViewScoped
@@ -22,25 +21,25 @@ public class RegistrationBean implements Serializable{
 	private static final long serialVersionUID = 3965537739759107231L;
 
 	@EJB
-	private EmployeeServiceLocal employeeServiceLocal;
-	
-	@EJB
-	private ProjectOwnerServiceLocal projectOwnerServiceLocal;
+	private ApplicationUserServiceLocal applicationUserServiceLocal;
 	
 	private Account user = new Account();
 	
 	public String registerAsEmployee() {
-		Employee employee = new Employee();
-		employee.setAccount(user);
-		employeeServiceLocal.save(employee);
+		register(Role.ROLE_EMPLOYEE);
 		return "login?faces-redirect=true";
 	}
 	
 	public String registerAsProjectOwner() {
-		ProjectOwner projectOwner = new ProjectOwner();
-		projectOwner.setAccount(user);
-		projectOwnerServiceLocal.save(projectOwner);
+		register(Role.ROLE_PROJECTOWNER);
 		return "login?faces-redirect=true";
+	}
+	
+	private void register(Role role) {
+		user.setRole(role);
+		ApplicationUser applicationUser = new ApplicationUser();
+		applicationUser.setAccount(user);
+		applicationUserServiceLocal.save(applicationUser);
 	}
 	
 	public Account getUser() {
@@ -51,20 +50,12 @@ public class RegistrationBean implements Serializable{
 		this.user = user;
 	}
 
-	public EmployeeServiceLocal getEmployeeServiceLocal() {
-		return employeeServiceLocal;
+	public ApplicationUserServiceLocal getApplicationUserServiceLocal() {
+		return applicationUserServiceLocal;
 	}
 
-	public void setEmployeeServiceLocal(EmployeeServiceLocal employeeServiceLocal) {
-		this.employeeServiceLocal = employeeServiceLocal;
-	}
-
-	public ProjectOwnerServiceLocal getProjectOwnerServiceLocal() {
-		return projectOwnerServiceLocal;
-	}
-
-	public void setProjectOwnerServiceLocal(
-			ProjectOwnerServiceLocal projectOwnerServiceLocal) {
-		this.projectOwnerServiceLocal = projectOwnerServiceLocal;
+	public void setApplicationUserServiceLocal(
+			ApplicationUserServiceLocal applicationUserServiceLocal) {
+		this.applicationUserServiceLocal = applicationUserServiceLocal;
 	}
 }

@@ -9,7 +9,7 @@ import org.dubenets.projects.projectagent.domain.enums.Role;
 import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 
 @Local
-public interface UserDAOLocal extends GenericDAO<ApplicationUser> {
+public interface ApplicationUserDAOLocal extends GenericDAO<ApplicationUser> {
 
 	public List<ApplicationUser> getUsersWithRoles(Role ... userRoles);	
 	

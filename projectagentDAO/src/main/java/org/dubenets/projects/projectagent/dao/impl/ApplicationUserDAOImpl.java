@@ -11,18 +11,18 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.dubenets.projects.projectagent.dao.generic.impl.GenericDAOImpl;
-import org.dubenets.projects.projectagent.dao.local.UserDAOLocal;
-import org.dubenets.projects.projectagent.dao.remote.UserDAORemote;
+import org.dubenets.projects.projectagent.dao.local.ApplicationUserDAOLocal;
+import org.dubenets.projects.projectagent.dao.remote.ApplicationUserDAORemote;
 import org.dubenets.projects.projectagent.domain.enums.Role;
 import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 
 /**
  * Session Bean implementation class UserDAOImpl
  */
-@Stateless(mappedName = "UserDAOImpl")
-public class UserDAOImpl extends GenericDAOImpl<ApplicationUser> implements UserDAORemote, UserDAOLocal {
+@Stateless(mappedName = "ApplicationUserDAOImpl")
+public class ApplicationUserDAOImpl extends GenericDAOImpl<ApplicationUser> implements ApplicationUserDAORemote, ApplicationUserDAOLocal {
 
-    public UserDAOImpl() {
+    public ApplicationUserDAOImpl() {
     	super();
     }
 

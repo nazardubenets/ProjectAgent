@@ -29,10 +29,21 @@
 					</ui:insert>
 				</div>
 				<h:form prependId="false">
-					<security:authorize access="hasRole ( 'ROLE_USER' )">
+					<security:authorize access="hasRole ( 'ROLE_PROJECTOWNER' )">
+					    <prime:menubar>
+					    	<prime:menuitem value="#{message.projects}" outcome="listOwnerProjects" />
+					    	<prime:menuitem value="#{message.employees}" url="#" />
+					    	<prime:menuitem value="#{message.history}" url="#" />
+					    	<prime:menuitem value="#{message.profile}" url="#" />
+					    	<prime:menuitem value="#{message.about}" url="#" />
+					        <f:facet name="options">
+					            <prime:inputText style="margin-right:10px"/>
+					        </f:facet>
+					    </prime:menubar>
+					</security:authorize>
+					<security:authorize access="hasRole ( 'ROLE_EMPLOYEE' )">
 					    <prime:menubar>
 					    	<prime:menuitem value="#{message.projects}" outcome="listEmployeeProjects" />
-					    	<prime:menuitem value="#{message.employees}" url="#" />
 					    	<prime:menuitem value="#{message.project_owners}" url="#" />
 					    	<prime:menuitem value="#{message.history}" url="#" />
 					    	<prime:menuitem value="#{message.profile}" url="#" />

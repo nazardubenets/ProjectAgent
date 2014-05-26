@@ -66,11 +66,11 @@ public class Project implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "projectOwner_id", referencedColumnName = "id")
-	private ProjectOwner projectOwner;
+	private ApplicationUser projectOwner;
 	
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH }, fetch = FetchType.EAGER)
 	@JoinTable(joinColumns = { @JoinColumn(name = "projectId", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "employeeId", referencedColumnName = "id") })
-	private Set<Employee> hiredEmployees = new LinkedHashSet<Employee>();
+	private Set<ApplicationUser> hiredEmployees = new LinkedHashSet<ApplicationUser>();
 
 
 //	@OneToMany(mappedBy = "orderedProject", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)

@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:prime="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:security="http://www.springframework.org/security/tags">
 
 	<h:head>
 	</h:head>
@@ -12,9 +13,13 @@
 		<ui:composition template="/WEB-INF/templates/default.jspx">
 			<ui:define name="content">
 				<h:form prependId="false">
-					<prime:button value="Create project" outcome="createOrUpdateProject"/>
-					<prime:button value="Owner projects" outcome="listProjects"/>
-					<prime:button value="Employee projects" outcome="listEmployeeProjects"/>
+					<security:authorize access="hasRole ( 'ROLE_PROJECTOWNER' )">
+						<prime:button value="Create project" outcome="createOrUpdateProject"/>
+						<prime:button value="Owner projects" outcome="listOwnerProjects"/>
+					</security:authorize>
+					<security:authorize access="hasRole ( 'ROLE_EMPLOYEE' )">
+						<prime:button value="Employee projects" outcome="listEmployeeProjects"/>
+					</security:authorize>
 				</h:form>
     		</ui:define>
 		</ui:composition>

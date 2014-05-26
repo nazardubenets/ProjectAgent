@@ -12,10 +12,10 @@
 	<http use-expressions="true" auto-config="false" entry-point-ref="authenticationEntryPoint"
 		authentication-manager-ref="authenticationManager">
 
-		<intercept-url pattern="/admin/**" access="hasRole ( 'ROLE_ADMIN' )" />
-
-		<intercept-url pattern="/user/**"
-			access="hasAnyRole ( 'ROLE_USER', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/user/common/**" access="isAuthenticated()" />
+		<intercept-url pattern="/user/admin/**" access="hasRole ( 'ROLE_ADMIN' )" />
+		<intercept-url pattern="/user/employee/**" access="hasRole ( 'ROLE_EMPLOYEE' )" />
+		<intercept-url pattern="/user/projectowner/**" access="hasRole ( 'ROLE_PROJECTOWNER' )" />
 		
 		<intercept-url pattern="/error/**" access="isAuthenticated()" />
 

@@ -9,7 +9,7 @@ import org.dubenets.projects.projectagent.domain.enums.Role;
 import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 
 @Remote
-public interface UserDAORemote extends GenericDAO<ApplicationUser> {
+public interface ApplicationUserDAORemote extends GenericDAO<ApplicationUser> {
 	
 	public List<ApplicationUser> getUsersWithRoles(Role ... userRoles);
 	

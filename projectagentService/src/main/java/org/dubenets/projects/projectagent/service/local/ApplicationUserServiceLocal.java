@@ -9,7 +9,7 @@ import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 import org.dubenets.projects.projectagent.service.generic.GenericService;
 
 @Local
-public interface UserServiceLocal extends GenericService<ApplicationUser> {
+public interface ApplicationUserServiceLocal extends GenericService<ApplicationUser> {
 
 	public List<ApplicationUser> getUsersWithRoles(Role ... userRoles);
 }

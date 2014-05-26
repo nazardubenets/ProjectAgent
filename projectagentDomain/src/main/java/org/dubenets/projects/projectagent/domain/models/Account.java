@@ -37,7 +37,7 @@ public class Account implements Serializable {
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
-	private Role role = Role.ROLE_USER;
+	private Role role = Role.ROLE_EMPLOYEE;
 
 	private Boolean blocked = false;
 

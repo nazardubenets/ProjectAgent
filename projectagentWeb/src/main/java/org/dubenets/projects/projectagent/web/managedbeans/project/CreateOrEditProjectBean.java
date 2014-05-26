@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.dubenets.projects.projectagent.domain.models.Project;
-import org.dubenets.projects.projectagent.service.local.ProjectOwnerServiceLocal;
+import org.dubenets.projects.projectagent.service.local.ApplicationUserServiceLocal;
 import org.dubenets.projects.projectagent.service.local.ProjectServiceLocal;
 import org.dubenets.projects.projectagent.web.utility.JSFUtility;
 import org.dubenets.projects.projectagent.web.utility.SpringSecurityUtility;
@@ -26,22 +26,17 @@ public class CreateOrEditProjectBean implements Serializable {
 	private ProjectServiceLocal projectServiceLocal;
 	
 	@EJB
-	private ProjectOwnerServiceLocal projectOwnerServiceLocal;
+	private ApplicationUserServiceLocal applicationUserServiceLocal;
 
 	private Project project;
 
 	@PostConstruct
 	public void initializeBean() {
-		Boolean isProjectOwner = (Boolean)JSFUtility.getSessionParameter("isProjectOwner");
-		if (isProjectOwner) {
-			Long projectID = getProjectIDFromRequest();
-			if (projectID == null) {
-				initalizeBeanForProjectCreation();
-			} else {
-				initalizeBeanForProjectEditing(projectID);
-			}
+		Long projectID = getProjectIDFromRequest();
+		if (projectID == null) {
+			initalizeBeanForProjectCreation();
 		} else {
-			JSFUtility.sendError(403, "Only ProjectOwner can create or update projects.");
+			initalizeBeanForProjectEditing(projectID);
 		}
 	}
 
@@ -56,7 +51,7 @@ public class CreateOrEditProjectBean implements Serializable {
 
 	private void initalizeBeanForProjectCreation() {
 		project = new Project();
-		project.setProjectOwner(projectOwnerServiceLocal.findById(SpringSecurityUtility.getPrincipal().getId()));
+		project.setProjectOwner(applicationUserServiceLocal.findById(SpringSecurityUtility.getPrincipal().getId()));
 	}
 
 	private void initalizeBeanForProjectEditing(Long projectID) {
@@ -64,7 +59,7 @@ public class CreateOrEditProjectBean implements Serializable {
 		if (project == null) {
 			JSFUtility.sendError(404, "This project doesn't exist.");
 		} else if (!project.getProjectOwner().getId().equals(SpringSecurityUtility.getPrincipal().getId())) {
-			JSFUtility.sendError(403, "You are not an oner of this project.");
+			JSFUtility.sendError(403, "You are not an owner of this project.");
 		}
 	}
 	
@@ -79,6 +74,15 @@ public class CreateOrEditProjectBean implements Serializable {
 
 	public void setProjectServiceLocal(ProjectServiceLocal projectServiceLocal) {
 		this.projectServiceLocal = projectServiceLocal;
+	}
+
+	public ApplicationUserServiceLocal getApplicationUserServiceLocal() {
+		return applicationUserServiceLocal;
+	}
+
+	public void setApplicationUserServiceLocal(
+			ApplicationUserServiceLocal applicationUserServiceLocal) {
+		this.applicationUserServiceLocal = applicationUserServiceLocal;
 	}
 
 	public Project getProject() {

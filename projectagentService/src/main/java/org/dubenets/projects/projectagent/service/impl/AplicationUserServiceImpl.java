@@ -6,30 +6,30 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.dubenets.projects.projectagent.dao.generic.GenericDAO;
-import org.dubenets.projects.projectagent.dao.local.UserDAOLocal;
+import org.dubenets.projects.projectagent.dao.local.ApplicationUserDAOLocal;
 import org.dubenets.projects.projectagent.domain.enums.Role;
 import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 import org.dubenets.projects.projectagent.service.generic.impl.GenericServiceImpl;
-import org.dubenets.projects.projectagent.service.local.UserServiceLocal;
-import org.dubenets.projects.projectagent.service.remote.UserServiceRemote;
+import org.dubenets.projects.projectagent.service.local.ApplicationUserServiceLocal;
+import org.dubenets.projects.projectagent.service.remote.ApplicationUserServiceRemote;
 
 /**
  * Session Bean implementation class UserServiceImpl
  */
-@Stateless(mappedName = "UserServiceImpl")
-public class UserServiceImpl extends GenericServiceImpl<ApplicationUser> implements UserServiceRemote, UserServiceLocal {
+@Stateless(mappedName = "ApplicationUserServiceImpl")
+public class AplicationUserServiceImpl extends GenericServiceImpl<ApplicationUser> implements ApplicationUserServiceRemote, ApplicationUserServiceLocal {
        
-    public UserServiceImpl() {
+    public AplicationUserServiceImpl() {
         super();
     }
 
-    @EJB(beanInterface = UserDAOLocal.class)
+    @EJB(beanInterface = ApplicationUserDAOLocal.class)
     public void setGenericDAO(GenericDAO<ApplicationUser> genericDAO) {
     	this.genericDAO = genericDAO;
     }
 
 	@Override
 	public List<ApplicationUser> getUsersWithRoles(Role... userRoles) {
-		return ((UserServiceLocal) genericDAO).getUsersWithRoles(userRoles);
+		return ((ApplicationUserServiceLocal) genericDAO).getUsersWithRoles(userRoles);
 	}
 }

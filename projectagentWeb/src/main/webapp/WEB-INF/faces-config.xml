@@ -33,7 +33,7 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>listProjects</from-outcome>
+			<from-outcome>listOwnerProjects</from-outcome>
 			<to-view-id>/user/projectowner/project/list.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
