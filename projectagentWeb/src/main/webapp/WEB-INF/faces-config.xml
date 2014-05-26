@@ -42,5 +42,10 @@
 			<to-view-id>/user/employee/project/list.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>listAccounts</from-outcome>
+			<to-view-id>/user/admin/accounts/list.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

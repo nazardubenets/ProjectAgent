@@ -29,17 +29,30 @@
 					</ui:insert>
 				</div>
 				<h:form prependId="false">
-				    <prime:menubar>
-				    	<prime:menuitem value="#{message.projects}" outcome="listEmployeeProjects" />
-				    	<prime:menuitem value="#{message.employees}" url="#" />
-				    	<prime:menuitem value="#{message.project_owners}" url="#" />
-				    	<prime:menuitem value="#{message.history}" url="#" />
-				    	<prime:menuitem value="#{message.profile}" url="#" />
-				    	<prime:menuitem value="#{message.about}" url="#" />
-				        <f:facet name="options">
-				            <prime:inputText style="margin-right:10px"/>
-				        </f:facet>
-				    </prime:menubar>
+					<security:authorize access="hasRole ( 'ROLE_USER' )">
+					    <prime:menubar>
+					    	<prime:menuitem value="#{message.projects}" outcome="listEmployeeProjects" />
+					    	<prime:menuitem value="#{message.employees}" url="#" />
+					    	<prime:menuitem value="#{message.project_owners}" url="#" />
+					    	<prime:menuitem value="#{message.history}" url="#" />
+					    	<prime:menuitem value="#{message.profile}" url="#" />
+					    	<prime:menuitem value="#{message.about}" url="#" />
+					        <f:facet name="options">
+					            <prime:inputText style="margin-right:10px"/>
+					        </f:facet>
+					    </prime:menubar>
+					</security:authorize>
+					<security:authorize access="hasRole ( 'ROLE_ADMIN' )">
+					    <prime:menubar>
+					    	<prime:menuitem value="#{message.accounts}" outcome="listAccounts" />
+					    	<prime:menuitem value="#{message.history}" url="#" />
+					    	<prime:menuitem value="#{message.profile}" url="#" />
+					    	<prime:menuitem value="#{message.about}" url="#" />
+					        <f:facet name="options">
+					            <prime:inputText style="margin-right:10px"/>
+					        </f:facet>
+					    </prime:menubar>
+					</security:authorize>
 				</h:form>
 			</div>
 			<div id="content">
