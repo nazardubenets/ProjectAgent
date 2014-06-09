@@ -9,11 +9,8 @@
 
 <f:view>
 	<h:head>
-		<security:authorize access="hasRole ( 'ROLE_ADMIN' )">
-			<script>window.location.replace("./admin/adminWelcome.htm");</script>
-		</security:authorize>
-		<security:authorize access="hasRole ( 'ROLE_USER' )">
-			<script>window.location.replace("./user/userWelcome.htm");</script>
+		<security:authorize access="isAuthenticated()">
+			<script>window.location.replace("./user/common/main.htm");</script>
 		</security:authorize>
 		
 		<h:outputStylesheet library="css" name="common.css" />
@@ -31,7 +28,7 @@
 				<h2 class="login-title">#{message.registration_title}</h2>
 				<h:inputText id="username" required="true" value="#{registrationBean.user.username}"
 					p:placeholder="#{message.common_username}" requiredMessage="#{message.common_requiredUsername}" validatorMessage="#{message.common_incorrectUsername}">
-					<f:validateLength minimum="5" maximum="10" />
+					<f:validateRegex pattern="[a-zA-Z0-9._+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}" />
 				</h:inputText>
 				<h:message for="username" styleClass="loginErrorMessage" showSummary="true" showDetail="false"/>
 				<h:inputSecret id="password" required="true" value="#{registrationBean.user.password}"

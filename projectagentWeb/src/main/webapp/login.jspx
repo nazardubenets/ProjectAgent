@@ -9,10 +9,7 @@
 
 <f:view>
 	<h:head>
-		<security:authorize access="hasRole ( 'ROLE_ADMIN' )">
-			<script>window.location.replace("./admin/adminWelcome.htm");</script>
-		</security:authorize>
-		<security:authorize access="hasRole ( 'ROLE_USER' )">
+		<security:authorize access="isAuthenticated()">
 			<script>window.location.replace("./user/common/main.htm");</script>
 		</security:authorize>
 		
@@ -30,7 +27,7 @@
 				<h:outputText rendered="#{not empty param.error}" value="#{sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}" styleClass="loginErrorMessage"/>
 				<h:inputText id="j_username" required="true"
 					p:placeholder="#{message.common_username}" requiredMessage="#{message.common_requiredUsername}" validatorMessage="#{message.common_incorrectUsername}">
-					<f:validateLength minimum="5" maximum="10" />
+					<f:validateRegex pattern="[a-zA-Z0-9._+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}" />
 				</h:inputText>
 				<h:message for="j_username" styleClass="loginErrorMessage" showSummary="true" showDetail="false"/>
 				<h:inputSecret id="j_password" required="true"

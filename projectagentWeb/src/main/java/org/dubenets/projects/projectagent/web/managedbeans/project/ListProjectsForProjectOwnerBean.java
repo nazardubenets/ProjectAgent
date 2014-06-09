@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.dubenets.projects.projectagent.domain.enums.ReadinessStage;
 import org.dubenets.projects.projectagent.domain.models.Project;
 import org.dubenets.projects.projectagent.service.local.ProjectServiceLocal;
 import org.dubenets.projects.projectagent.web.utility.SpringSecurityUtility;
@@ -19,7 +20,7 @@ public class ListProjectsForProjectOwnerBean implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7642945546640237892L;
+	private static final long serialVersionUID = 764294554664237892L;
 	
 	@EJB
 	private ProjectServiceLocal projectServiceLocal;
@@ -35,12 +36,18 @@ public class ListProjectsForProjectOwnerBean implements Serializable{
 	@PostConstruct
 	public void initializeBean() {
 		allProjects = projectServiceLocal.getAll();
-		for (Project project :allProjects) {
+		for (Project project : allProjects) {
 			if (project.getProjectOwner().getId().equals(SpringSecurityUtility.getPrincipal().getId())) {
 				myProjects.add(project);
 			}
 		}
-		allProjects.removeAll(myProjects);
+		allProjects = new ArrayList<Project>();
+		for (Project project : myProjects) {
+			if (project.getReadinessStage().equals(ReadinessStage.CREATED) || project.getReadinessStage().equals(ReadinessStage.STOPPED)) {
+				allProjects.add(project);
+			}
+		}
+		myProjects.removeAll(allProjects);
 	}
 
 	public ProjectServiceLocal getProjectServiceLocal() {

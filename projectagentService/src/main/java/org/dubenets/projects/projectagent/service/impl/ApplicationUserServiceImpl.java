@@ -17,9 +17,9 @@ import org.dubenets.projects.projectagent.service.remote.ApplicationUserServiceR
  * Session Bean implementation class UserServiceImpl
  */
 @Stateless(mappedName = "ApplicationUserServiceImpl")
-public class AplicationUserServiceImpl extends GenericServiceImpl<ApplicationUser> implements ApplicationUserServiceRemote, ApplicationUserServiceLocal {
+public class ApplicationUserServiceImpl extends GenericServiceImpl<ApplicationUser> implements ApplicationUserServiceRemote, ApplicationUserServiceLocal {
        
-    public AplicationUserServiceImpl() {
+    public ApplicationUserServiceImpl() {
         super();
     }
 

@@ -3,24 +3,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:prime="http://primefaces.org/ui"
+	xmlns:security="http://www.springframework.org/security/tags">
 
 <h:head>
 </h:head>
 <h:body>
 	<ui:composition>
-		<div id="cent">
-			<div id="EPAM_logo"></div>
-			<ul class="footerMenuRow">
-				<li><a href="#"><div>AAAAAAA</div></a></li>
-				<li><a href="#"><div>BBBBBBBB</div></a></li>
-				<li><a href="#"><div>CCCCCC</div></a></li>
-				<li><a href="#"><div>FFFFFFFF</div></a></li>
-			</ul>
-			<span id="contactAdministrator"> <a>Contact administrator</a>
-			</span> <span id="copyright">1993 - 2001
-			</span>
-		</div>
+		<h:form prependId="false">
+			<security:authorize access="hasRole ( 'ROLE_PROJECTOWNER' )">
+			    <prime:dock position="bottom">
+			    	<prime:menuitem value="#{message.projects}" icon="/resources/img/project-icon.png" outcome="listOwnerProjects" />
+			    	<prime:menuitem value="#{message.employees}" icon="/resources/img/employees-icon.png" url="#" />
+			    	<prime:menuitem value="#{message.history}" icon="/resources/img/history-icon.png" url="#" />
+			    	<prime:menuitem value="#{message.profile}" icon="/resources/img/profile-icon.png" outcome="updateProfile" />
+			    	<prime:menuitem value="#{message.about}" icon="/resources/img/about-icon.png" outcome="main" />
+			    </prime:dock>
+			</security:authorize>
+			<security:authorize access="hasRole ( 'ROLE_EMPLOYEE' )">
+			    <prime:dock position="bottom">
+			    	<prime:menuitem value="#{message.projects}" icon="/resources/img/project-icon.png" outcome="listEmployeeProjects" />
+			    	<prime:menuitem value="#{message.project_owners}" icon="/resources/img/projectowners-icon.png" url="#" />
+			    	<prime:menuitem value="#{message.history}" icon="/resources/img/history-icon.png" url="#" />
+			    	<prime:menuitem value="#{message.profile}" icon="/resources/img/profile-icon.png" outcome="updateProfile" />
+			    	<prime:menuitem value="#{message.about}" icon="/resources/img/about-icon.png" outcome="main" />
+			    </prime:dock>
+			</security:authorize>
+			<security:authorize access="hasRole ( 'ROLE_ADMIN' )">
+			    <prime:dock>
+			    	<prime:menuitem value="#{message.accounts}"  icon="/resources/img/accounts-icon.png" outcome="listAccounts" />
+			    	<prime:menuitem value="#{message.history}" icon="/resources/img/history-icon.png" url="#" />
+			    	<prime:menuitem value="#{message.profile}" icon="/resources/img/profile-icon.png" outcome="updateProfile" />
+			    	<prime:menuitem value="#{message.about}" icon="/resources/img/about-icon.png" outcome="main" />
+			    </prime:dock>
+			</security:authorize>
+		</h:form>
 	</ui:composition>
 </h:body>
 </html>

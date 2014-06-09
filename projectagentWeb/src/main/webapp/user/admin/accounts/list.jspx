@@ -15,21 +15,20 @@
 				<h:form prependId="false" id="mainForm">
 					<prime:dataTable id="accounts" var="account" value="#{listAccountsBean.allAccounts}" selection="#{listAccountsBean.selectedAccounts}" rowKey="#{account.id}">
 				        <prime:column selectionMode="multiple" style="width:5%;text-align:center"/>
-				        <prime:column headerText="Id">
-				            <h:outputText value="#{account.id}" />
+				        <prime:column headerText="#{message.profile_username}">
+				        	<prime:link outcome="updateProfile" value="#{account.username}">
+							    <f:param name="userID" value="#{account.id}" />
+							</prime:link>
 				        </prime:column>
-				        <prime:column headerText="Username">
-				            <h:outputText value="#{account.username}" />
-				        </prime:column>
-				        <prime:column headerText="Role">
+				        <prime:column headerText="#{message.profile_role}">
 				            <h:outputText value="#{account.role}" />
 				        </prime:column>
-				        <prime:column headerText="Blocked">
+				        <prime:column headerText="#{message.profile_blocked}">
 				            <h:outputText value="#{account.blocked}" />
 				        </prime:column>
 				        <f:facet name="footer">
-				            <prime:commandButton update=":mainForm:accounts" icon="ui-icon-search" value="Block" action="#{listAccountsBean.block()}" />
-				            <prime:commandButton update=":mainForm:accounts" icon="ui-icon-search" value="Unblock" action="#{listAccountsBean.unblock()}" />
+				            <prime:commandButton update=":mainForm:accounts" value="#{message.profile_block}" action="#{listAccountsBean.block()}" styleClass="projectagent-command-button"/>
+				            <prime:commandButton update=":mainForm:accounts" value="#{message.profile_unblock}" action="#{listAccountsBean.unblock()}" styleClass="projectagent-command-button"/>
 				        </f:facet>
 				    </prime:dataTable>
 				</h:form>

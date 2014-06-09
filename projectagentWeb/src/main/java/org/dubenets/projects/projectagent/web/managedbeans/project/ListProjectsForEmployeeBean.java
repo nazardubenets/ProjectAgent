@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.dubenets.projects.projectagent.domain.enums.ReadinessStage;
 import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 import org.dubenets.projects.projectagent.domain.models.Project;
 import org.dubenets.projects.projectagent.service.local.ApplicationUserServiceLocal;
@@ -44,11 +45,17 @@ public class ListProjectsForEmployeeBean implements Serializable{
 	public void initializeBean() {
 		allProjects = projectServiceLocal.getAll();
 		employee = applicationUserServiceLocal.findById(SpringSecurityUtility.getPrincipal().getId());
+		List<Project> tempList = new ArrayList<Project>();
 		for (Project project : allProjects) {
-			if (project.getHiredEmployees().contains(employee)) {
-				myProjects.add(project);
+			if (project.getHiredEmployees().contains(employee) || !project.getReadinessStage().equals(ReadinessStage.PUBLISHED)) {
+				if (project.getHiredEmployees().contains(employee)) {
+					myProjects.add(project);
+				} else {
+					tempList.add(project);
+				}
 			}
 		}
+		allProjects.removeAll(tempList);
 		allProjects.removeAll(myProjects);
 	}
 	

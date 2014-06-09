@@ -26,13 +26,13 @@ button:focus {
 .container403{
 	width:100%;
 	height:600px;
-	background: url("#{resource['img/403.jpg']}");
+	background: url("#{resource['img/403.png']}");
 }
 
 .container500{
 	width:100%;
 	height:600px;
-	background: url("#{resource['img/500.jpg']}");
+	background: url("#{resource['img/500.png']}");
 }
 
 .projectagent-command-button {
@@ -101,7 +101,11 @@ button:focus {
 	font-size:11px
 }
 
-.ui-inputfield, .ui-chkbox-box{
+.boldLabel {
+	font-weight: bold;
+}
+
+.ui-inputfield, .ui-chkbox-box, .ui-dock-container-bottom{
 	color:black !important;
 	background: white !important;
 }
@@ -115,4 +119,28 @@ button:focus {
 
 .ui-datascroller .ui-datascroller-item {
 	margin-bottom: 10px;
+}
+
+
+.ui-paginator-top, .ui-paginator-bottom, .ui-datatable-footer {
+	background: white !important;
+	border: 0px !important;
+	text-align: left !important;
+	top: 1px !important;
+	position: relative !important;
+}
+
+.ui-paginator .ui-paginator-page, .ui-paginator .ui-paginator-pages, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev, .ui-paginator .ui-paginator-current {
+	padding: 0px 3px !important;
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+	border-radius: 3px !important;
+}
+.ui-datatable-data  td{
+	border-width: 0px !important;
+	text-align: center;
+}
+.ui-dock-bottom {
+	width: 18% !important;
+	bottom: 10px !important;
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:prime="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:security="http://www.springframework.org/security/tags">
+
+	<h:head>
+	</h:head>
+	<h:body>
+		<ui:composition template="/WEB-INF/templates/default.jspx">
+			<ui:define name="content">
+				<h:outputScript library="js" name="common.js" target="body" />
+				<h:form prependId="false">
+					<prime:panel header="#{message.profile}">  
+				        <h:panelGrid columns="2" cellpadding="5">  
+				            <h:outputText styleClass="boldLabel" value="#{message.profile_username}" />  
+				            <h:outputText value="#{updateProfileBean.user.account.username}"/>
+				            
+				            <h:outputText styleClass="boldLabel" value="#{message.profile_role}" />  
+				            <h:outputText value="#{updateProfileBean.user.account.role}"/>
+				            
+				            <security:authorize access="hasAnyRole ( 'ROLE_PROJECTOWNER', 'ROLE_EMPLOYEE')">
+				            	<h:outputText styleClass="boldLabel" value="#{message.profile_finishedProjects}" />  
+				            	<h:outputText value="#{updateProfileBean.finishedProjectsCount}"/>
+				            	
+				            	<h:outputText styleClass="boldLabel" value="#{message.profile_stoppedProjects}" />  
+				            	<h:outputText value="#{updateProfileBean.stoppedProjectsCount}"/>
+				            	
+				            	<h:outputText styleClass="boldLabel" value="#{message.profile_publishedProjects}" />  
+				            	<h:outputText value="#{updateProfileBean.publishedProjectsCount}"/>
+				            </security:authorize>
+				            
+				            <h:outputText styleClass="boldLabel" value="#{message.profile_cv}" />
+				            <h:panelGroup rendered="#{updateProfileBean.user.account.id ne authenticationBean.principal.id}">
+								<h:outputText value="#{updateProfileBean.user.account.cv}" escape="false"/>
+							</h:panelGroup>
+				           	<prime:inplace editor="true" styleClass="unescape" toggleable="true" widgetVar="cvEditor" rendered="#{updateProfileBean.user.account.id eq authenticationBean.principal.id}">
+								<prime:ajax event="save"
+									listener="#{updateProfileBean.updateProfile}" oncomplete="unescape()"/>
+								<prime:ajax event="cancel" oncomplete="unescape()" />
+								<prime:editor id="editor"
+									value="#{updateProfileBean.user.account.cv}"/>
+							</prime:inplace>
+				        </h:panelGrid>  
+				    </prime:panel>
+				</h:form>
+    		</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

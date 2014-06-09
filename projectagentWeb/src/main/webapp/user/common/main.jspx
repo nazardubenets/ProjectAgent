@@ -13,13 +13,18 @@
 		<ui:composition template="/WEB-INF/templates/default.jspx">
 			<ui:define name="content">
 				<h:form prependId="false">
-					<security:authorize access="hasRole ( 'ROLE_PROJECTOWNER' )">
-						<prime:button value="Create project" outcome="createOrUpdateProject"/>
-						<prime:button value="Owner projects" outcome="listOwnerProjects"/>
-					</security:authorize>
-					<security:authorize access="hasRole ( 'ROLE_EMPLOYEE' )">
-						<prime:button value="Employee projects" outcome="listEmployeeProjects"/>
-					</security:authorize>
+					<prime:fieldset legend="#{message.project_owners}" style="margin-bottom:20px">
+			            <h:outputText
+			                value="#{message.projectOwnerDescription}" />
+				    </prime:fieldset>
+					<prime:fieldset legend="#{message.employees}" style="margin-bottom:20px">
+			            <h:outputText
+			                value="#{message.employeeDescription}" />
+				    </prime:fieldset>
+					<prime:fieldset legend="#{message.administrators}" style="margin-bottom:20px">
+			            <h:outputText
+			                value="#{message.administratorDescription}" />
+				    </prime:fieldset>
 				</h:form>
     		</ui:define>
 		</ui:composition>

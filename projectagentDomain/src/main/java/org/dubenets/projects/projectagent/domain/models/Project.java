@@ -46,6 +46,12 @@ public class Project implements Serializable {
 	@SequenceGenerator(name = "projectIdGenereator", sequenceName = "projectIdSequence", initialValue = 1, allocationSize = 1)
 	private Long id;
 
+	@Column(nullable = false)
+	private Integer maxHiredEmployees = 1;
+	
+	@Column(nullable = false)
+	private Integer salary = 0;
+	
 	@Column(unique = true, nullable = false)
 	private String name;
 

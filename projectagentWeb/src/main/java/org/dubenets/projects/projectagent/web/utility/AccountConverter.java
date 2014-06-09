@@ -16,7 +16,8 @@ public class AccountConverter {
 			String password = account.getPassword();
 			Role role = account.getRole();
 			Boolean blocked = account.getBlocked();
-			userDetails = new UserDetailsAccount(id, username, password, role, blocked);
+			String cv = account.getCv();
+			userDetails = new UserDetailsAccount(id, username, password, cv, role, blocked);
 		}
 		return userDetails;
 	}
@@ -29,7 +30,8 @@ public class AccountConverter {
 			String password = userDetails.getPassword();
 			Role role = userDetails.getRole();
 			Boolean blocked = userDetails.getBlocked();
-			account = new Account(id, username, password, role, blocked);
+			String cv = userDetails.getCv();
+			account = new Account(id, username, password, cv, role, blocked);
 		}
 		return account;
 	}

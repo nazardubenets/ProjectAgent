@@ -17,30 +17,26 @@
 						<prime:tab id="allProjectsTab" title="#{message.projects_allProjects}">
 							<prime:dataScroller id="allProjects" var="project" value="#{listProjectsForEmployeeBean.allProjects}" chunkSize="3">
 								<prime:panel header="#{project.name}">
-									<h:panelGrid columns="1" style="width:33%">
-										<h:panelGrid columns="2">
-											<h:outputText value="#{message.common_projectOwner}" />
-											<h:outputText value="#{project.projectOwner.account.username}" />
-										</h:panelGrid>
-										<h:panelGrid columns="2">
-											<h:outputText value="#{message.project_description}" />
+									<h:panelGrid columns="2" style="width:33%">
+											<h:outputText styleClass="boldLabel" value="#{message.common_projectOwner}" />
+											<prime:link outcome="updateProfile" value="#{project.projectOwner.account.username}">
+											    <f:param name="userID" value="#{project.projectOwner.account.id}" />
+											</prime:link>
+											<h:outputText styleClass="boldLabel" value="#{message.project_salary}" />
+											<h:outputText value="#{project.salary}" />
+											<h:outputText styleClass="boldLabel" value="#{message.project_maxHiredEmployees}" />
+											<h:outputText value="#{project.maxHiredEmployees}" />
+											<h:outputText styleClass="boldLabel" value="#{message.project_description}" />
 											<h:panelGroup styleClass="projectDescription">
 												<h:outputText value="#{project.description}" escape="false"/>
 											</h:panelGroup>
-										</h:panelGrid>
-										<h:panelGrid columns="2">
-											<h:outputText value="#{message.project_startDate}" />
+											<h:outputText styleClass="boldLabel" value="#{message.project_startDate}" />
 											<h:outputText value="#{project.startTime}" />
-										</h:panelGrid>
-										<h:panelGrid columns="2">
-											<h:outputText value="#{message.project_endDate}" />
+											<h:outputText styleClass="boldLabel" value="#{message.project_endDate}" />
 											<h:outputText value="#{project.endTime}" />
-										</h:panelGrid>
-										<h:panelGrid columns="2">
-											<h:outputText value="#{message.project_stage}" />
+											<h:outputText styleClass="boldLabel" value="#{message.project_stage}" />
 											<h:outputText value="#{project.readinessStage}" />
-										</h:panelGrid>
-										<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.signFor(project)}" ajax="true" update=":mainForm:temp" />
+										<prime:commandButton value="#{message.common_assign}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.signFor(project)}" ajax="true" update=":mainForm:temp" />
 									</h:panelGrid>	
 								</prime:panel>
 						    </prime:dataScroller>
@@ -48,29 +44,27 @@
 						<prime:tab id="myProjectsTab" title="#{message.projects_myProjects}">
 							<prime:dataScroller id="myProjects" var="project" value="#{listProjectsForEmployeeBean.myProjects}" chunkSize="3">
 								<prime:panel header="#{project.name}">
-									<h:panelGrid columns="2">
-										<h:outputText value="#{message.common_projectOwner}" />
-										<h:outputText value="#{project.projectOwner.account.username}" />
-									</h:panelGrid>
-									<h:panelGrid columns="2">
-										<h:outputText value="#{message.project_description}" />
+									<h:panelGrid columns="2" style="width:33%">
+										<h:outputText styleClass="boldLabel" value="#{message.common_projectOwner}" />
+										<prime:link outcome="updateProfile" value="#{project.projectOwner.account.username}">
+										    <f:param name="userID" value="#{project.projectOwner.account.id}" />
+										</prime:link>
+										<h:outputText styleClass="boldLabel" value="#{message.project_salary}" />
+										<h:outputText value="#{project.salary}" />
+										<h:outputText styleClass="boldLabel" value="#{message.project_maxHiredEmployees}" />
+										<h:outputText value="#{project.maxHiredEmployees}" />
+										<h:outputText styleClass="boldLabel" value="#{message.project_description}" />
 										<h:panelGroup styleClass="projectDescription">
 											<h:outputText value="#{project.description}" escape="false"/>
 										</h:panelGroup>
-									</h:panelGrid>
-									<h:panelGrid columns="2">
-										<h:outputText value="#{message.project_startDate}" />
+										<h:outputText styleClass="boldLabel" value="#{message.project_startDate}" />
 										<h:outputText value="#{project.startTime}" />
-									</h:panelGrid>
-									<h:panelGrid columns="2">
-										<h:outputText value="#{message.project_endDate}" />
+										<h:outputText styleClass="boldLabel" value="#{message.project_endDate}" />
 										<h:outputText value="#{project.endTime}" />
-									</h:panelGrid>
-									<h:panelGrid columns="2">
-										<h:outputText value="#{message.project_stage}" />
+										<h:outputText styleClass="boldLabel" value="#{message.project_stage}" />
 										<h:outputText value="#{project.readinessStage}" />
+										<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.unsignFrom(project)}" ajax="true" update=":mainForm:temp" rendered="#{project.readinessStage eq 'PUBLISHED'}" />
 									</h:panelGrid>
-									<prime:commandButton value="#{message.common_save}" styleClass="projectagent-command-button" action="#{listProjectsForEmployeeBean.unsignFrom(project)}" ajax="true" update=":mainForm:temp" />
 								</prime:panel>
 						    </prime:dataScroller>
 						</prime:tab>

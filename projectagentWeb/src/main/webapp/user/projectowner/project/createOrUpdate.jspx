@@ -11,29 +11,58 @@
 	<h:body>
 		<ui:composition template="/WEB-INF/templates/default.jspx">
 			<ui:define name="content">
-				<h:form prependId="false">
-					<prime:panel header="Masks">  
+				<h:form prependId="false" id="mainForm">
+					<prime:panel header="#{message.project}">  
 				        <h:panelGrid columns="2" cellpadding="5">  
-				            <h:outputText value="#{message.project_name}" />  
+				            <h:outputText styleClass="boldLabel" value="#{message.project_name}" />  
 				            <prime:inputText value="#{createOrEditProjectBean.project.name}"/>
 				              
-				            <h:outputText value="#{message.project_description}" />  
-				            <prime:editor id="editor" value="#{createOrEditProjectBean.project.description}" width="600"/>
-				              
-				            <h:outputText value="#{message.project_startDate}" />  
+				            <h:outputText styleClass="boldLabel" value="#{message.project_description}" />  
+				            <prime:editor id="editor" value="#{createOrEditProjectBean.project.description}" widgetVar="editor" width="635"/>
+				            
+				            <h:outputText styleClass="boldLabel" value="#{message.project_startDate}" />  
 				            <prime:calendar value="#{createOrEditProjectBean.project.startTime}" id="startDate" mindate="new Date();" maxdate="#{createOrEditProjectBean.project.endTime}" locale="#{languageBean.selectedLanguage}">
 				            	<prime:ajax event="dateSelect" update="endDate" />
 				            </prime:calendar>
 				            
-				            <h:outputText value="#{message.project_endDate}" />  
+				            <h:outputText styleClass="boldLabel" value="#{message.project_endDate}" />  
 				            <prime:calendar value="#{createOrEditProjectBean.project.endTime}" id="endDate" mindate="#{createOrEditProjectBean.project.startTime}" locale="#{languageBean.selectedLanguage}">
 				            	 <prime:ajax event="dateSelect" update="startDate" />  
 				            </prime:calendar>
-				          
-				            <h:commandButton type="submit" value="#{message.common_save}" action="#{createOrEditProjectBean.saveProject}" styleClass="projectagent-command-button"/>  
-				            <h:commandButton type="reset" value="#{message.common_reset}" styleClass="projectagent-command-button"/>  
-				        </h:panelGrid>  
+				            
+				            <h:outputText styleClass="boldLabel" value="#{message.project_maxHiredEmployees}" />  
+        					<prime:spinner id="maxHiredEmployees" value="#{createOrEditProjectBean.project.maxHiredEmployees}" min="1"/>
+				            
+				            <h:outputText styleClass="boldLabel" value="#{message.project_salary}" />
+        					<prime:spinner id="salary" value="#{createOrEditProjectBean.project.salary}" prefix="$" min="0"/>
+					        
+					        <h:outputText styleClass="boldLabel" value="#{message.employees}" />
+					        <h:panelGroup id="employees" layout="block">
+							    <prime:carousel value="#{createOrEditProjectBean.project.hiredEmployees}" var="employee" rendered="#{createOrEditProjectBean.project.hiredEmployees.size() gt 0}">
+							        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+										<h:outputText value="#{message.profile_username}" />
+										<prime:link outcome="updateProfile" value="#{employee.account.username}">
+										    <f:param name="userID" value="#{employee.account.id}" />
+										</prime:link>
+										
+							            <prime:commandButton update=":mainForm:cvDialog" value="#{message.profile_cv}" oncomplete="PF('cvDialog').show();" styleClass="projectagent-command-button">
+							                <f:setPropertyActionListener value="#{employee}" target="#{createOrEditProjectBean.selectedEmployee}" />
+							            </prime:commandButton>
+							            <prime:commandButton icon="ui-icon-close" styleClass="projectagent-command-button" action="#{createOrEditProjectBean.remove(employee)}" ajax="true" update=":mainForm:employees" rendered="#{createOrEditProjectBean.project.readinessStage eq 'PUBLISHED'}"/>
+							        </h:panelGrid>
+							    </prime:carousel>
+							    <br/>
+					            <prime:commandButton type="submit" value="#{message.common_save}" action="#{createOrEditProjectBean.saveProject}" rendered="#{createOrEditProjectBean.project.readinessStage eq 'CREATED'}" styleClass="projectagent-command-button"/>  
+					            <prime:commandButton type="submit" value="#{message.common_publish}" action="#{createOrEditProjectBean.publishProject}" rendered="#{createOrEditProjectBean.project.readinessStage eq 'CREATED'}" styleClass="projectagent-command-button"/> 
+					            <prime:commandButton type="submit" value="#{message.common_start}" action="#{createOrEditProjectBean.startProject}" rendered="#{createOrEditProjectBean.readyToStart}" styleClass="projectagent-command-button"/> 
+					            <prime:commandButton type="submit" value="#{message.common_stop}" action="#{createOrEditProjectBean.stopProject}" rendered="#{createOrEditProjectBean.project.readinessStage eq 'STARTED'}" styleClass="projectagent-command-button"/> 
+					            <prime:commandButton type="submit" value="#{message.common_finish}" action="#{createOrEditProjectBean.finishProject}" rendered="#{createOrEditProjectBean.readyToFinish}" styleClass="projectagent-command-button"/> 
+					        </h:panelGroup>
+				        </h:panelGrid>
 				    </prime:panel>
+				    <prime:dialog header="#{message.profile_cv}" id="cvDialog" widgetVar="cvDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="500">
+				        <h:outputText value="#{createOrEditProjectBean.selectedEmployee.account.cv}" escape="false"/>
+				    </prime:dialog>
 				</h:form>
     		</ui:define>
 		</ui:composition>

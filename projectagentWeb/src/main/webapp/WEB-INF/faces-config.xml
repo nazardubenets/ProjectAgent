@@ -47,5 +47,10 @@
 			<to-view-id>/user/admin/accounts/list.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>updateProfile</from-outcome>
+			<to-view-id>/user/common/updateProfile.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

@@ -1,12 +1,15 @@
 package org.dubenets.projects.projectagent.web.managedbeans.project;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.dubenets.projects.projectagent.domain.enums.ReadinessStage;
+import org.dubenets.projects.projectagent.domain.models.ApplicationUser;
 import org.dubenets.projects.projectagent.domain.models.Project;
 import org.dubenets.projects.projectagent.service.local.ApplicationUserServiceLocal;
 import org.dubenets.projects.projectagent.service.local.ProjectServiceLocal;
@@ -30,6 +33,8 @@ public class CreateOrEditProjectBean implements Serializable {
 
 	private Project project;
 
+	private ApplicationUser selectedEmployee;
+	
 	@PostConstruct
 	public void initializeBean() {
 		Long projectID = getProjectIDFromRequest();
@@ -63,11 +68,49 @@ public class CreateOrEditProjectBean implements Serializable {
 		}
 	}
 	
+	public String remove(ApplicationUser employee) {
+		project.getHiredEmployees().remove(employee);
+		projectServiceLocal.update(project);
+		return null;
+	}
+	
 	public String saveProject() {
 		projectServiceLocal.update(project);
-		return "main";
+		return "listOwnerProjects";
+	}
+	
+	public String publishProject() {
+		project.setReadinessStage(ReadinessStage.PUBLISHED);
+		projectServiceLocal.update(project);
+		return "listOwnerProjects";
+	}
+	
+	public String startProject() {
+		project.setReadinessStage(ReadinessStage.STARTED);
+		projectServiceLocal.update(project);
+		return "listOwnerProjects";
+	}
+	
+	public String stopProject() {
+		project.setReadinessStage(ReadinessStage.STOPPED);
+		projectServiceLocal.update(project);
+		return "listOwnerProjects";
 	}
 
+	public String finishProject() {
+		project.setReadinessStage(ReadinessStage.FINISHED);
+		projectServiceLocal.update(project);
+		return "listOwnerProjects";
+	}
+	
+	public boolean isReadyToFinish() {
+		return project.getReadinessStage().equals(ReadinessStage.STARTED) && new Date().after(project.getEndTime());
+	}
+	
+	public boolean isReadyToStart() {
+		return project.getReadinessStage().equals(ReadinessStage.PUBLISHED) && new Date().after(project.getStartTime()) && (project.getHiredEmployees().size() == project.getMaxHiredEmployees());
+	}
+	
 	public ProjectServiceLocal getProjectServiceLocal() {
 		return projectServiceLocal;
 	}
@@ -91,5 +134,13 @@ public class CreateOrEditProjectBean implements Serializable {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public ApplicationUser getSelectedEmployee() {
+		return selectedEmployee;
+	}
+
+	public void setSelectedEmployee(ApplicationUser selectedEmployee) {
+		this.selectedEmployee = selectedEmployee;
 	}
 }

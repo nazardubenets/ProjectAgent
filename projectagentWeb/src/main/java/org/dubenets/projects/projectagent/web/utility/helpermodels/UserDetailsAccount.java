@@ -28,6 +28,8 @@ public class UserDetailsAccount implements UserDetails {
 
 	private String password;
 	
+	private String cv;
+	
 	private Role role;
 
 	private Boolean blocked;

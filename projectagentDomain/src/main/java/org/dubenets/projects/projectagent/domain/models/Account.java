@@ -36,6 +36,9 @@ public class Account implements Serializable {
 	@Column(nullable = false)
 	private String password;
 	
+	@Column(columnDefinition = "TEXT")
+	private String cv = "...";
+	
 	@Enumerated(EnumType.STRING)
 	private Role role = Role.ROLE_EMPLOYEE;
 

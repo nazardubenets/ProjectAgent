@@ -11,6 +11,7 @@
 	<h:body>
 		<ui:composition template="/WEB-INF/templates/default.jspx">
 			<ui:define name="content">
+				<prime:button value="#{message.project_create}" outcome="createOrUpdateProject" styleClass="projectagent-command-button"/>
 				<prime:tabView id="projectTabs">
 					<prime:tab id="allProjectsTab" title="#{message.projects_allProjects}">
 						<h:form>
@@ -18,14 +19,31 @@
 				                 paginator="true" rows="10"
 				                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				                 rowsPerPageTemplate="5,10,15">
-						        <prime:column sortBy="name" headerText="#{message.project_name}">
-						            <h:outputText value="#{project.name}" />
+				                 
+				                <prime:column sortBy="name" headerText="#{message.project_name}">
+						        	<prime:link outcome="createOrUpdate" value="#{project.name}">
+									    <f:param name="projectID" value="#{project.id}" />
+									</prime:link>
 						        </prime:column>
 						
 						        <prime:column sortBy="projectOwner.account.username" headerText="#{message.common_projectOwner}">
 						            <h:outputText value="#{project.projectOwner.account.username}" />
 						        </prime:column>
 						
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_salary}" />
+						            </f:facet>
+						            <h:outputText value="#{project.salary}" />
+						        </prime:column>
+						        
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_maxHiredEmployees}" />
+						            </f:facet>
+						            <h:outputText value="#{project.maxHiredEmployees}" />
+						        </prime:column>
+						        
 						        <prime:column>
 						            <f:facet name="header">
 						                <h:outputText value="#{message.project_creationDate}" />
@@ -61,7 +79,23 @@
 				                 rowsPerPageTemplate="5,10,15">
 						        
 						        <prime:column sortBy="name" headerText="#{message.project_name}">
-						            <h:outputText value="#{myProject.name}" />
+						        	<prime:link outcome="createOrUpdate" value="#{myProject.name}">
+									    <f:param name="projectID" value="#{myProject.id}" />
+									</prime:link>
+						        </prime:column>
+						        
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_salary}" />
+						            </f:facet>
+						            <h:outputText value="#{myProject.salary}" />
+						        </prime:column>
+						        
+						        <prime:column>
+						            <f:facet name="header">
+						                <h:outputText value="#{message.project_maxHiredEmployees}" />
+						            </f:facet>
+						            <h:outputText value="#{myProject.maxHiredEmployees}" />
 						        </prime:column>
 						        
 						        <prime:column headerText="#{message.project_creationDate}">
@@ -81,12 +115,6 @@
 						        
 						        <prime:column headerText="#{message.project_stage}">
 						            <h:outputText value="#{myProject.readinessStage}" />
-						        </prime:column>
-						        
-						        <prime:column headerText="#{message.common_actions}">
-						            <prime:button outcome="createOrUpdate" icon="ui-icon-star" title="Icon Only">
-									    <f:param name="projectID" value="#{myProject.id}" />
-									</prime:button>
 						        </prime:column>
 						    </prime:dataTable>
 						</h:form>
